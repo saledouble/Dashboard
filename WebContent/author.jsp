@@ -15,7 +15,7 @@
 		<div class = "div6">
 		<a href="index.jsp" ><div class = "div5">Dashboard</div></a>
 		<a href="use.jsp" ><div class = "div5">Use</div></a>
-		<a href="author.jsp" ><div class = "div5">Author</div></a>
+		<a href="author.jsp" ><div class = "div51">Author</div></a>
 		</div>
 	</div>
 	
@@ -30,7 +30,7 @@
 		
 		<!-- add image -->
 		<div  class = "div7">
-			<img alt="" src="resources/img/photo.jpg" />
+			<img id = "imgAuthor" alt="" src="resources/img/photo.jpg" />
 		</div>
 		
 		<!-- add text -->

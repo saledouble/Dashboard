@@ -7,11 +7,11 @@
 	font: normal normal normal 13px/1.4em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif ;color:#353535;} 
 .font_4 {font: normal normal normal 25px/1.4em museo-slab-w01-100,serif ;color:#353535;font-weight: bold;}
 .font_5 {font: normal normal normal 20px/1.4em museo-slab-w01-100,serif ;color:#353535;font-weight: bold;}
-.font_6 {font-family: Comic Sans, Comic Sans MS, cursive;font-size: 60px;}
+.font_6 {font-family: Blippo, fantasy;font-size: 60px;}
 
 .color_1 {color: #6B6B2E;}
 .color_2 {color: #3284A8;}
-.color_3 {color: #594a23;}
+.color_3 {color: #666666;}
 
 /* Set the main div of author.jsp*/
 .div1{
@@ -47,6 +47,15 @@
     *display:inline;  
     color:#6B6B2E;
     }
+
+.div51{ 
+	padding-right: 15px;
+	display:inline-block;  
+    _display:inline;  
+    *display:inline;  
+    color:#5B3481;
+    }    
+ 
 .div6{ text-align:center; clear:both;padding-top: 30px;}
 
 /* set style of img*/
@@ -58,11 +67,13 @@
 	width:193px;height:193px;
 	}
 
+/* Set the text div of author.jsp*/
 .div8{
 	display:inline-block;  
     _display:inline;  
     *display:inline;  
 	width:360px;height:300px;
+	text-align:left;
 }
 
 /* Set the main div of use.jsp*/
@@ -75,14 +86,14 @@
 .div10{
 	overflow:hidden;
 	background-color: rgba(255, 255, 255, 0.6);
-	top: 55px; width: 980px; height: 1157px; 
+	top: 55px; width: 980px; height: 1257px; 
 	text-align: left;
 }
 
 /* Set the body content of use.jsp*/
 .div11{
-	margin-right: 20px;
-	margin-left: 20px;
+	margin-right: 30px;
+	margin-left: 30px;
 }
 
 /* Set the main div of index.jsp*/
@@ -93,13 +104,36 @@
 
 /* Set the body of index.jsp*/
 .div13{
-	background-color: rgba(255, 255, 255, 0.6);
+	background-color: rgb(242, 240, 240);
 	top: 55px; width: 980px; height: 990px;
+	text-align: center;
 }
+
+/* Set the text div of index.jsp */
+.div14{
+	display:inline-block;  
+    _display:inline;  
+    *display:inline;  
+	width:500px;height:300px;
+	text-align: left;
+	margin-right: 30px;
+}
+
+/* Set the img div of index.jsp*/
+.div15{	
+	display:inline-block;  
+    _display:inline;  
+    *display:inline;  
+	width:300;height:170px;}
+	
+
+/* Set the body content of index.jsp*/
+.div16{	padding-top: 40px;padding-bottom: 40px;}
 
 hr{ width: 60%; color: black;height:1px;}
 
-img{width: 193px; height: 193px; object-fit: cover;}
+#imgAuthor{width: 193px; height: 193px; object-fit: cover;}
+#imgUniversityIcon{width: 300px; height: 170px; object-fit: cover;}
 
 .bodyBackground{
  	background-color: rgb(169, 146, 222); 

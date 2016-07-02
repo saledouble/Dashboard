@@ -10,7 +10,7 @@
 	<!-- header -->
 	<div class = "div2" >
 		<div class = "div6">
-		<a href="index.jsp" ><div class = "div5">Dashboard</div></a>
+		<a href="index.jsp" ><div class = "div51">Dashboard</div></a>
 		<a href="use.jsp" ><div class = "div5">Use</div></a>
 		<a href="author.jsp" ><div class = "div5">Author</div></a>
 		</div>
@@ -26,17 +26,20 @@
  		<!-- body content -->
 		<div class = "div13">
 			<!-- introduce --> 
-			<div>
+			<div class = "div16">
 				<!-- text -->
-				<div>
+				<div class ="div14">
+					<p class="font_1">The dashboard is a data querying dashboard retrieving information from tables in clinical literature.</p>
+					<p class="font_1">The dashboard will work on top of a PhD project conducted of the University of Manchester by Nikola Milosevic.</p>
+					<p class="font_1">The dashboard is a part of postgraduate project in the University of Manchester.</p>
 				</div>
 				
 				<!-- img -->
-				<div>
-					<img alt="" src="resources/img/universityIcon.jpg" />
+				<div class = "div15">
+					<img id = "imgUniversityIcon" alt="" src="resources/img/universityIcon.jpg" />
 				</div>
 				
-			</div>
+			</div><!-- introduce end -->
 			
 			<!-- query area -->
 			<div>
