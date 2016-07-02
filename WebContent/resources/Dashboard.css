@@ -1,16 +1,19 @@
 @CHARSET "UTF-8";
 
-.font_1 {
-	font: normal normal normal 15px/1.4em helvetica-w01-light,helvetica-w02-light,sans-serif;
-	color:#353535;
-} 
+.font_1 {font: normal normal normal 15px/1.4em helvetica-w01-light,helvetica-w02-light,sans-serif;color:#353535;} 
 .font_2 {font: normal normal normal 60px/1.4em museo-slab-w01-100,serif ;color:#6B6B2E;} 
-.font_3 {font: normal normal normal 13px/1.4em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif ;color:#353535;} }
+
+.font_3 {
+	font: normal normal normal 13px/1.4em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif ;color:#353535;} 
+.font_4 {font: normal normal normal 25px/1.4em museo-slab-w01-100,serif ;color:#353535;font-weight: bold;}
+.font_5 {font: normal normal normal 20px/1.4em museo-slab-w01-100,serif ;color:#353535;font-weight: bold;}
+.font_6 {font-family: Comic Sans, Comic Sans MS, cursive;font-size: 60px;}
 
 .color_1 {color: #6B6B2E;}
+.color_2 {color: #3284A8;}
+.color_3 {color: #594a23;}
 
-div{}
-
+/* Set the main div of author.jsp*/
 .div1{
 	width: 980px; height: 777px; 
   	margin:0 auto;
@@ -22,20 +25,19 @@ div{}
 	margin:0 auto;
 }	
 
+ /* Set the body of author.jsp*/
 .div3{
 	top: 55px; width: 980px; height: 634px;
-	background-color: #ffffff;
- 	/* for IE */
- 	filter:alpha(opacity=60);
-  	/* CSS3 standard */
-  	opacity:0.6;
-}
+	overflow:hidden;
+	background-color: rgba(255, 255, 255, 0.6);
+	} 
 
+/* Set style of footer*/
 .div4{
 	width: 980px;height: 88px; bottom: auto; top: 689px;
 	background-color: #ffffff;
 	text-align: right;
-	padding-top:70px;
+	padding-top: 20px;
 }
 
 .div5{ 
@@ -43,84 +45,87 @@ div{}
 	display:inline-block;  
     _display:inline;  
     *display:inline;  
-    zoom:1; }
-.div6{ text-align:center; clear:both; padding-top:30px;}
+    color:#6B6B2E;
+    }
+.div6{ text-align:center; clear:both;padding-top: 30px;}
 
-
-
-/* .div1{
-	top: 0px; width: 980px; height: 55px; position: absolute; left: 0px;
-}	
-.div2{
-	top: 16px; left: 1px; width: 980px; position: absolute; height: 31px;
-}
-.div3{
-	display: inline-block; text-align: center; overflow: visible; height: 31px;
-	width:calc(100% - 0px);white-space:nowrap;position:relative;overflow:hidden;
-}
-.div4{
-	text-align:center;
-}
-.div5{
-	top: 251px; left: 432px; width: 343px; position: absolute;
-}
-.div6{
-	top: 55px; width: 980px; height: 634px; position: absolute; left: 0px;
-}
+/* set style of img*/
 .div7{
-	top: 0px; left: 0px; width: 980px; height: 634px; position: absolute;
-}
+	padding-right: 15px;
+	display:inline-block;  
+    _display:inline;  
+    *display:inline;  
+	width:193px;height:193px;
+	}
+
 .div8{
-	top:235px;bottom:;left:225px;right:;width:193px;height:193px;position:absolute;
+	display:inline-block;  
+    _display:inline;  
+    *display:inline;  
+	width:360px;height:300px;
 }
-.div9{width:193px;height:193px;}
-.div10{width:193px;height:193px;position:relative;}
-.div11{top: 89px; left: 301px; width: 350px; position: absolute;}
-.div12{top: 0px; left: 0px; width: 980px; height: 634px; position: absolute;}
-.div13{top: 0px; width: 980px; position: static; height: 777px;}
-.div14{width: 1411px; left: -216px;position:absolute;top:0;right:0;bottom:0;left:0;}}
-.div15{width: 980px; position: absolute; left: 0px; height: 88px; bottom: auto; top: 689px;}
-.div16{width: 1411px; left: -216px;}
-.div17{top: 18px; left: 651px; width: 416px; position: absolute;}
-.div18{width: 1411px; left: -216px;}
-.div19{position:absolute;top:0;right:0;bottom:0;left:0;}
-.div20{position:absolute;top:0;right:0;bottom:0;left:0;background:rgba(107, 107, 46, 1);border-radius:0;}
-.div21{position:absolute;top:0px;right:0px;bottom:0px;left:0px;background-color:rgba(255, 255, 255, 1);border-radius:0;  box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.6), inset 0 -1px 1px rgba(255, 255, 255, 0.75);}
-.div21{padding:0 5px;} */
 
-a{position: relative; box-sizing: border-box; overflow: visible;}
-.a1{display: inherit; color: grey; width: 93px; height: 31px; 
-position: relative; box-sizing: border-box; overflow: visible;
-height:100%;position:relative;box-sizing:border-box;
-display:inline-block;cursor:pointer;
-font:normal normal normal 13px/1.4em Arial,'ｍｓ ｐゴシック','ms pgothic','돋움',dotum,helvetica,sans-serif ;
+/* Set the main div of use.jsp*/
+.div9{
+  	margin:0 auto;
+	width: 980px;  height: 1300px;
 }
-.a2{display: inherit; color: grey; width: 53px;height: 31px;position: relative; box-sizing: border-box; overflow: visible;}
-.a3{display: inherit; color: grey; width: 69px;height: 31px;position: relative; box-sizing: border-box; overflow: visible;}
 
-.headerP{text-align: center; line-height: 31px;display:inline-block;padding:0 10px;color:#6B6B2E;transition: color 0.4s ease 0s;
+/* Set the body of use.jsp*/
+.div10{
+	overflow:hidden;
+	background-color: rgba(255, 255, 255, 0.6);
+	top: 55px; width: 980px; height: 1157px; 
+	text-align: left;
 }
+
+/* Set the body content of use.jsp*/
+.div11{
+	margin-right: 20px;
+	margin-left: 20px;
+}
+
+/* Set the main div of index.jsp*/
+.div12{
+	margin:0 auto;
+	width: 980px; height: 990px; 
+}
+
+/* Set the body of index.jsp*/
+.div13{
+	background-color: rgba(255, 255, 255, 0.6);
+	top: 55px; width: 980px; height: 990px;
+}
+
+hr{ width: 60%; color: black;height:1px;}
 
 img{width: 193px; height: 193px; object-fit: cover;}
 
-body{
-	background-color: rgb(169, 146, 222);
+.bodyBackground{
+ 	background-color: rgb(169, 146, 222); 
 	background-size: auto; 
 	background-position: center center; 
 	background-repeat: repeat;
 	text-align: center;
+	background-image: url('img/background.png'); 
 }
-/* .background{position: absolute;height: 100%; width: 100%;}
-.currentBackground{top: 0px; height: 100%; width: 100%; position: absolute; 
-transform: matrix(1, 0, 0, 1, 0, 0); visibility: inherit; opacity: 1; 
-background-color: rgb(169, 146, 222);}
-.background-img{
-	position: absolute; 
-	top: 0px; height: 100%; 
-	width: 100%; 
-	background-size: auto; 
-	background-position: center center; 
-	background-repeat: repeat;
-	background-image: url(resources/img/background.png);
+
+#indexBackground{
+	background-color: rgb(194, 196, 196);
+	margin: 0;
+    padding: 0;
 }
- */
+
+#pictureStrip{ 
+    background-image:url('img/background.png');
+    background-color:rgb(169, 146, 222);
+    height:320px;
+    width:100%;
+    margin:0 auto; 
+    text-align: center;
+    vertical-align: middle;
+    line-height: 320px; 
+}
+
+
+
