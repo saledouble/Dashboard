@@ -1,0 +1,148 @@
+@CHARSET "UTF-8";
+
+.dropbtn {
+    background-color: #8963B7;
+    color: white;
+    padding: 12px 0px 12px 0px;
+    font-size: 16px;
+    border: none;    
+    cursor: pointer;
+    font-family: helvetica-w01-light,helvetica-w02-light,sans-serif; 
+}
+
+#dropholder{
+	background-color: #8963B7;
+  	width: 190px;
+  	height: 40px;
+	margin: 20px 0 0 0; /* top right bottom left*/
+  	padding:0 0 0 10px;
+  	border-radius:5px;
+  	font-family: helvetica-w01-light,helvetica-w02-light,sans-serif; 
+}
+
+.dropdown{
+	font-size: 16px;
+  	color:#ffffff;  	
+	font-family: helvetica-w01-light,helvetica-w02-light,sans-serif; 	
+   	margin-left:10px;
+  	float: left;
+  	width: 100px;
+  	padding:0 0 0 20px;
+  	border-radius:0 5px 5px 0;
+  	height:40px;
+  	border-left:1px solid #ffffff;
+  	text-align: left;
+  	position: relative;
+}
+
+.dropdown:after{
+  content:"▾";
+  font-size: 18px;
+  position: absolute;
+  left:100px;
+  top:7px;
+  display: block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    text-align: center;
+    z-index:100;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropP{
+  	float: left;
+  	line-height:10px;
+  	vertical-align: middle;
+	font-size: 16px;
+  	color:#ffffff; 
+}
+
+#inputField{
+	width: 190px;
+  	height: 40px;
+	margin: 30px 0 0 0; /* top right bottom left*/
+  	font-family: helvetica-w01-light,helvetica-w02-light,sans-serif; 
+}
+
+input[type="text"] {
+	padding: 10px;
+	border: solid 1px #afafaf;
+	border-radius:5px;
+}
+
+
+////// table design
+.tableBody
+{
+	line-height: 1.6em;
+}
+
+#queryTable
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	background: #fff;
+	margin: 20px 60px 0 65px;
+	width: 850px;
+	border-collapse: collapse;
+	text-align: left;
+}
+#queryTable th
+{
+	font-size: 14px;
+	font-weight: normal;
+	color: #039;
+	padding: 10px 8px;
+	border-bottom: 2px solid #6678b1;
+}
+#queryTable td
+{
+	color: #669;
+	padding: 9px 8px 0px 8px;
+}
+#queryTable tbody tr:hover td
+{
+	color: #009;
+}
+
+#deleteImg{
+	width: 10px;
+	height: 10px;
+}
+
+#runQuery{
+	background-color: #5BB069;
+	color: #ffffff;
+	border-radius:5px;
+	border: none;
+	margin: 5px;
+}
+
+#fileButton{
+	background-color: #8963B7;
+	color: #ffffff;
+	border-radius:5px;
+	border: none;
+	margin: 20px 10px 20px 10px;
+	padding: 10px 30px 10px 30px;
+	font-family: helvetica-w01-light,helvetica-w02-light,sans-serif; 
+	font-size: 16px;
+}

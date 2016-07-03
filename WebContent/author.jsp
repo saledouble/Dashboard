@@ -26,7 +26,7 @@
 			<h2 class="font_2">Grace Tang</h2>
 		</div>
 		
-		<hr />
+		<hr id ="authorHr"/>
 		
 		<!-- add image -->
 		<div  class = "div7">
@@ -43,7 +43,7 @@
 		<p class="font_1">please sent an e-mail to&nbsp;saledouble@qq.com.</p>
 		</div>
 		
-		<hr/>
+		<hr id ="authorHr"/>
 	</div> <!-- body end -->
 	
 	<!-- footer -->
