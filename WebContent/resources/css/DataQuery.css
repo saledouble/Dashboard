@@ -89,7 +89,7 @@ input[type="text"] {
 }
 
 
-////// table design
+/* table design */
 .tableBody
 {
 	line-height: 1.6em;
@@ -99,7 +99,7 @@ input[type="text"] {
 {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 	font-size: 12px;
-	background: #fff;
+	background-color: rgb(242, 240, 240);
 	margin: 20px 60px 0 65px;
 	width: 850px;
 	border-collapse: collapse;
@@ -109,18 +109,19 @@ input[type="text"] {
 {
 	font-size: 14px;
 	font-weight: normal;
-	color: #039;
+	color: #7C34A3;
 	padding: 10px 8px;
-	border-bottom: 2px solid #6678b1;
+	border-bottom: 2px solid #60128B;
 }
+
 #queryTable td
 {
-	color: #669;
+	color: #8F62A7;
 	padding: 9px 8px 0px 8px;
 }
 #queryTable tbody tr:hover td
 {
-	color: #009;
+	color: #8936B5;
 }
 
 #deleteImg{
@@ -145,4 +146,52 @@ input[type="text"] {
 	padding: 10px 30px 10px 30px;
 	font-family: helvetica-w01-light,helvetica-w02-light,sans-serif; 
 	font-size: 16px;
+}
+
+
+/* tabs*/
+.container{
+	margin: 20px 60px 20px 60px;
+	font-family: helvetica-w01-light,helvetica-w02-light,sans-serif; 
+	line-height: 1.6;
+	width: 850px;
+	text-align: left;
+}
+
+ul.tabs{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+ul.tabs li{
+	display: inline-block;
+	padding: 5px 15px 2px 15px;
+	cursor: pointer;
+	color: #fff;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+}
+.tab-link.current{background-color: #8963B7;}
+.tab-link{background-color: #b6b6b6;}
+
+.tab-content{
+	display: none;
+	padding: 15px;
+	border: 1px solid #8963B7;
+	background-color: #fff;
+	height: 400px;
+	
+}
+
+.tab-content.current{
+	display: inherit;
+}
+
+#QueryText{
+	font-family: helvetica-w01-light,helvetica-w02-light,sans-serif;
+	font-size:16px;
+	color: #8963B7;
+	text-align: left;
+	margin: 10px 60px 10px 60px;
 }

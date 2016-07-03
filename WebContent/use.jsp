@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="resources/Dashboard.css" />
+	<link rel="stylesheet" type="text/css" href="resources/css/Dashboard.css" />
 	<title>Dashboard</title>
 </head>
 <body class = "bodyBackground">
@@ -63,7 +61,7 @@
 	
 	<!-- footer -->
 	<div class = "div4">
-		<p class="font_3">Copyright Â© 2016 Grace Tang.&nbsp;All Rights Reserved.&nbsp;&nbsp; </p>
+		<p class="font_3">Copyright © 2016 Grace Tang.&nbsp;All Rights Reserved.&nbsp;&nbsp; </p>
 	</div> <!-- footer end -->
 	
 </div>

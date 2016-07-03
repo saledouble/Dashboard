@@ -3,9 +3,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="resources/Dashboard.css" />
-	<link rel="stylesheet" type="text/css" href="resources/DataQuery.css" />
+	<link rel="stylesheet" type="text/css" href="resources/css/Dashboard.css" />
+	<link rel="stylesheet" type="text/css" href="resources/css/DataQuery.css" />
+
+	<!-- 有空试试本地导jQuery包，先这样写着 -->	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js" type="text/javascript"></script>
+	<script src="resources/js/tabs.js"></script>
+	
 	<title>Dashboard</title>
+	
 </head>
 <body id="indexBackground">
 	<!-- header -->
@@ -151,6 +157,18 @@
             		<td>$150</td>
             		<td><button id="runQuery">Run</button></td>
         		</tr>
+        		<tr>
+        			<td><img id = "deleteImg" alt="" src="resources/img/delete.png" /></td>
+        			<td>Josephin Tan</td>
+            		<td>$150</td>
+            		<td><button id="runQuery">Run</button></td>
+        		</tr>
+        		<tr>
+        			<td><img id = "deleteImg" alt="" src="resources/img/delete.png" /></td>
+        			<td>Josephin Tan</td>
+            		<td>$150</td>
+            		<td><button id="runQuery">Run</button></td>
+        		</tr>
    			 </tbody>
 			</table>
 				
@@ -166,12 +184,26 @@
 			<hr id = "indexHr"/>
 			
 			<!-- result -->
-			<div>
-			</div>
+			<div class="container">
 
+				<ul class="tabs">
+					<li class="tab-link current" data-tab="tab-1">Result</li>
+					<li class="tab-link" data-tab ="tab-2">Text</li>
+				</ul>
+
+				<div id="tab-1" class="tab-content current">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+				</div>
+				<div id="tab-2" class="tab-content">
+		 			Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</div>
+
+			</div> <!-- result tabs end -->
 			
-
-
+			<div id = "QueryText">
+				The Query is:
+			</div>
+			
 		</div> <!-- body content end -->
 	
 		<!-- footer -->

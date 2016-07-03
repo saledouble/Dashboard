@@ -99,13 +99,14 @@
 /* Set the main div of index.jsp*/
 .div12{
 	margin:0 auto;
-	width: 980px; height: 990px; 
+	width: 980px; height: 1400px; 
 }
 
 /* Set the body of index.jsp*/
 .div13{
 	background-color: rgb(242, 240, 240);
-	top: 55px; width: 980px; height: 990px;
+	top: 55px; 
+	width: 980px; height: 1312px;
 	text-align: center;
 }
 
@@ -149,7 +150,7 @@
 	background-position: center center; 
 	background-repeat: repeat;
 	text-align: center;
-	background-image: url('img/background.png'); 
+	background-image: url('../img/background.png'); 
 }
 
 #indexBackground{
@@ -159,7 +160,7 @@
 }
 
 #pictureStrip{ 
-    background-image:url('img/background.png');
+    background-image:url('../img/background.png');
     background-color:rgb(169, 146, 222);
     height:320px;
     width:100%;
