@@ -1,14 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> -->
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="resources/css/Dashboard.css" />
-	<link rel="stylesheet" type="text/css" href="resources/css/DataQuery.css" />
+	<link rel="stylesheet" type="text/css" href="<%=path %>/resources/css/Dashboard.css" />
+	<link rel="stylesheet" type="text/css" href="<%=path %>/resources/css/DataQuery.css" />
 
 	<!-- 有空试试本地导jQuery包，先这样写着 -->	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js" type="text/javascript"></script>
-	<script src="resources/js/tabs.js"></script>
+	<script type="text/javascript" src="<%=path %>/resources/js/tabs.js"></script>
+
+<!--  	  <script type="text/javascript">
+ 	 function ajaxPost() {
+      $.ajax({  
+          type: "POST",  
+          data: {food :$( 'select[name="food"] option:selected').text()},   
+          success: function(response) {
+				alert( response );
+			}   
+      }); 
+      }
+  	</script>   -->
 	
 	<title>Dashboard</title>
 	
@@ -58,22 +75,39 @@
 			<table style="width:100%">
   			<tr>
     			<td>
-    				<!-- select drop-down menu -->
+					<!-- select drop-down menu -->
 					<div id = "dropholder" style="margin-left: 60px;">
   					<p class = "dropP">Select</p>
 						<div class="dropdown">
-  						<button class="dropbtn">&nbsp;&nbsp;</button>
+<!--   						<button class="dropbtn">&nbsp;&nbsp;</button>
  				 		<div class="dropdown-content">
     						<a href="#">Table</a>
     						<a href="#">Cell</a>
     						<a href="#">Number</a>
-  						</div>
+  						</div> -->
+  						
+  						<form:select path="select">
+					  	<form:option value="" label="-----" />
+					  	<form:options items="${queryValues}" />
+				       </form:select>
+
 						</div>
-					</div>
+					</div> 					
+
     			</td>
-    			<td></td> 
-    			<td></td>
-    			<td></td>
+    			<td>
+
+ 					<%-- <a href="<%=path %>/hello">Click Here</a> 
+ --%>
+    			</td>
+    			
+    			<td>
+    			
+    			<div></div>
+    			
+    			</td>
+    			<td>
+    			</td>
   			</tr>
   			<!-- constraint 1-->
   			<tr>
@@ -132,6 +166,14 @@
 					</div> 
     			</td>
   			</tr>
+  			<tr>
+  				<td></td>
+  				<td></td>
+  				<td></td>
+  				<td>
+  				<input  id="fileButton" style="margin-right:50px;" type="submit" name="submit" value="Submit& Run"></td>
+  			</tr>
+  			
 			</table>
 	
 			<!-- list of query -->
