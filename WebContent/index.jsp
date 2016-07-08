@@ -13,19 +13,7 @@
 
 	<!-- 有空试试本地导jQuery包，先这样写着 -->	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js" type="text/javascript"></script>
-	<script type="text/javascript" src="<%=path %>/resources/js/tabs.js"></script>
-
-<!--  	  <script type="text/javascript">
- 	 function ajaxPost() {
-      $.ajax({  
-          type: "POST",  
-          data: {food :$( 'select[name="food"] option:selected').text()},   
-          success: function(response) {
-				alert( response );
-			}   
-      }); 
-      }
-  	</script>   -->
+	<script type="text/javascript" src="<%=path %>/resources/js/tabs.js" ></script>
 	
 	<title>Dashboard</title>
 	
@@ -69,6 +57,57 @@
 			<hr id = "indexHr"/>
 			
 			<!-- query area -->
+			<!-- list of query -->
+			
+			<p class="font_7" >Query history:</p>
+			<table id="queryTable" class = "tableBody">
+    		<thead>
+    			<tr>
+    				<th width = "50px"></th>
+        			<th width = "150px">Select</th>
+            		<th>Constraints</th>
+            		<th width = "100px">Query</th>
+        		</tr>
+    		</thead>
+    		<tbody>
+    			<tr>
+    				<td><img id = "deleteImg" alt="" src="resources/img/delete.png" /></td>
+        			<td>Stephen C. Cox</td>
+            		<td>$300</td>
+            		<td><button id ="runQuery">Run</button></td>
+        		</tr>
+        		<tr>
+        			<td><img id = "deleteImg" alt="" src="resources/img/delete.png" /></td>
+        			<td>Josephin Tan</td>
+            		<td>$150</td>
+            		<td><button id="runQuery">Run</button></td>
+        		</tr>
+        		<tr>
+        			<td><img id = "deleteImg" alt="" src="resources/img/delete.png" /></td>
+        			<td>Josephin Tan</td>
+            		<td>$150</td>
+            		<td><button id="runQuery">Run</button></td>
+        		</tr>
+        		<tr>
+        			<td><img id = "deleteImg" alt="" src="resources/img/delete.png" /></td>
+        			<td>Josephin Tan</td>
+            		<td>$150</td>
+            		<td><button id="runQuery">Run</button></td>
+        		</tr>
+   			 </tbody>
+			</table>
+				
+			<!-- Save/ Import -->
+			<table>
+				<tr>
+					<td width="660px"></td>
+					<td><button id="fileButton">Import</button></td>
+					<td><button id="fileButton">Save</button></td>
+				</tr>
+			</table>
+			
+			<hr id = "indexHr"/> <!-- query history end -->
+			
 			<!-- retrieve -->
 			<!-- input the constraints -->
 			
@@ -79,26 +118,22 @@
 					<div id = "dropholder" style="margin-left: 60px;">
   					<p class = "dropP">Select</p>
 						<div class="dropdown">
-<!--   						<button class="dropbtn">&nbsp;&nbsp;</button>
- 				 		<div class="dropdown-content">
-    						<a href="#">Table</a>
-    						<a href="#">Cell</a>
-    						<a href="#">Number</a>
-  						</div> -->
-  						
-  						<form:select path="select">
-					  	<form:option value="" label="-----" />
-					  	<form:options items="${queryValues}" />
-				       </form:select>
+						
+							<select class="dropSelect" name="select">
+								<option selected disabled hidden></option>
+   								<option value="Table">Table</option>
+   								<option value="Cell">Cell</option>
+   								<option value="Number">Number</option>
+							</select> 
+												
+						</div> 
 
-						</div>
 					</div> 					
 
     			</td>
     			<td>
 
- 					<%-- <a href="<%=path %>/hello">Click Here</a> 
- --%>
+ 					<%-- <a href="<%=path %>/hello">Click Here</a>  --%>
     			</td>
     			
     			<td>
@@ -175,55 +210,7 @@
   			</tr>
   			
 			</table>
-	
-			<!-- list of query -->
-			<table id="queryTable" class = "tableBody">
-    		<thead>
-    			<tr>
-    				<th width = "50px"></th>
-        			<th width = "150px">Select</th>
-            		<th>Constraints</th>
-            		<th width = "100px">Query</th>
-        		</tr>
-    		</thead>
-    		<tbody>
-    			<tr>
-    				<td><img id = "deleteImg" alt="" src="resources/img/delete.png" /></td>
-        			<td>Stephen C. Cox</td>
-            		<td>$300</td>
-            		<td><button id ="runQuery">Run</button></td>
-        		</tr>
-        		<tr>
-        			<td><img id = "deleteImg" alt="" src="resources/img/delete.png" /></td>
-        			<td>Josephin Tan</td>
-            		<td>$150</td>
-            		<td><button id="runQuery">Run</button></td>
-        		</tr>
-        		<tr>
-        			<td><img id = "deleteImg" alt="" src="resources/img/delete.png" /></td>
-        			<td>Josephin Tan</td>
-            		<td>$150</td>
-            		<td><button id="runQuery">Run</button></td>
-        		</tr>
-        		<tr>
-        			<td><img id = "deleteImg" alt="" src="resources/img/delete.png" /></td>
-        			<td>Josephin Tan</td>
-            		<td>$150</td>
-            		<td><button id="runQuery">Run</button></td>
-        		</tr>
-   			 </tbody>
-			</table>
-				
-			<!-- Save/ Import -->
-			<table>
-				<tr>
-					<td width="660px"></td>
-					<td><button id="fileButton">Import</button></td>
-					<td><button id="fileButton">Save</button></td>
-				</tr>
-			</table>
 			
-			<hr id = "indexHr"/>
 			
 			<!-- result -->
 			<div class="container">
@@ -241,10 +228,6 @@
 				</div>
 
 			</div> <!-- result tabs end -->
-			
-			<div id = "QueryText">
-				The Query is:
-			</div>
 			
 		</div> <!-- body content end -->
 	

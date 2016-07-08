@@ -1,13 +1,24 @@
 @CHARSET "UTF-8";
 
 .dropbtn {
-    background-color: #8963B7;
+    background-color: #ffb81a;
     color: white;
-    padding: 12px 0px 12px 0px;
     font-size: 16px;
     border: none;    
     cursor: pointer;
     font-family: helvetica-w01-light,helvetica-w02-light,sans-serif; 
+    
+}
+
+.dropSelect {
+	
+   	background-color: #8963B7;
+    color: white;
+    font-size: 16px;
+    border: none;    
+    cursor: pointer;
+    font-family: helvetica-w01-light,helvetica-w02-light,sans-serif; 
+	margin: 0 0 0 10px; 
 }
 
 #dropholder{
@@ -23,29 +34,26 @@
 
 .dropdown{
 	font-size: 16px;
-  	color:#ffffff;  	
+  	color:#fff;  	
 	font-family: helvetica-w01-light,helvetica-w02-light,sans-serif; 	
    	margin-left:10px;
   	float: left;
   	width: 100px;
-  	padding:0 0 0 20px;
+  	padding:10px 0 10px 0; 	
   	border-radius:0 5px 5px 0;
-  	height:40px;
   	border-left:1px solid #ffffff;
   	text-align: left;
   	position: relative;
 }
 
-.dropdown:after{
+/* .dropdown:after{
   content:"▾";
   font-size: 18px;
   position: absolute;
   left:100px;
   top:7px;
   display: block;
-}
-
-
+} */
 
  .dropdown-content {
     display: none;
@@ -66,12 +74,6 @@
 
 .dropdown-content a:hover {background-color: #f1f1f1;}
 
-
-
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
 
 .dropP{
   	float: left;
