@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -64,7 +63,7 @@
     		<thead>
     			<tr>
     				<th width = "50px"></th>
-        			<th width = "150px">Select</th>
+        			<th width = "150px">select</th>
             		<th>Constraints</th>
             		<th width = "100px">Query</th>
         		</tr>
@@ -109,31 +108,31 @@
 			<hr id = "indexHr"/> <!-- query history end -->
 			
 			<!-- retrieve -->
-			<!-- input the constraints -->
-			
+			<!-- input the constraints -->		
+<%-- 			
 			<table style="width:100%">
   			<tr>
     			<td>
-					<!-- select drop-down menu -->
+<!-- 					select drop-down menu
 					<div id = "dropholder" style="margin-left: 60px;">
-  					<p class = "dropP">Select</p>
-						<div class="dropdown">
-						
-							<select class="dropSelect" name="select">
-								<option selected disabled hidden></option>
-   								<option value="Table">Table</option>
-   								<option value="Cell">Cell</option>
-   								<option value="Number">Number</option>
-							</select> 
-												
-						</div> 
+  					<p class = "dropP">select</p>
+						<div class="dropdown"> -->
 
-					</div> 					
+							<form:select class="dropSelect" name="select" path="phone">
+								<form:option value = "default" selected disabled hidden></form:option>
+   								<form:option value="Table">Table</form:option>
+   								<form:option value="Cell">Cell</form:option>
+   								<form:option value="Number">Number</form:option>
+							</form:select> 
+					
+<!-- 						</div> 
+
+					</div> 	 -->				
 
     			</td>
     			<td>
 
- 					<%-- <a href="<%=path %>/hello">Click Here</a>  --%>
+ 					<a href="<%=path %>/hello">Click Here</a> 
     			</td>
     			
     			<td>
@@ -151,33 +150,37 @@
 					<div id = "dropholder" style="margin-left: 60px;">
   						<p class = "dropP">&nbsp;Field&nbsp;&nbsp;</p>
 						<div class="dropdown">
-  						<button class="dropbtn">&nbsp;&nbsp;</button>
- 				 			<div class="dropdown-content">
-						    	<a href="#">Cell</a>
-    							<a href="#">Caption</a>
-    							<a href="#">Stub</a>
-    							<a href="#">Super-row</a>
-    							<a href="#">Header</a>
-    							<a href="#">Footer</a>
-    							<a href="#">Row</a>
-    							<a href="#">Column</a>   
-  							</div>
+						
+  							<form:select class="dropSelect" name="select" path="phone">
+								<form:option value = "default"  selected disabled hidden></form:option>
+   								<form:option value="Cell">Cell</form:option>
+   								<form:option value="Caption">Caption</form:option>
+   								<form:option value="Stub">Stub</form:option>
+   								<form:option value="Super-row">Super-row</form:option>
+   								<form:option value="Header">Header</form:option>
+   								<form:option value="Footer">Footer</form:option>
+   								<form:option value="Row">Row</form:option>
+   								<form:option value="Column">Column</form:option>
+							</form:select> 
+							
 						</div>
 					</div>
    				</td>
     			<td>
     				<!-- operations drop-down menu -->
 					<div id = "dropholder">
-  						<p class = "dropP">OPS&nbsp;&nbsp;</p>
+  						<p class = "dropP">OPS&nbsp;&nbsp;&nbsp;&nbsp;</p>
 						<div class="dropdown">
-  						<button class="dropbtn">&nbsp;&nbsp;</button>
- 				 			<div class="dropdown-content">
- 				 			    <a href="#">Contains</a>
-    							<a href="#">&gt;</a>
-    							<a href="#">&lt;</a>
-    							<a href="#">Range</a>
-    							<a href="#">Type</a>  	 							
-  							</div>
+  							
+  							<form:select class="dropSelect" name="select" path="phone">
+								<form:option value = "default"  selected disabled hidden></form:option>
+   								<form:option value="Contains">Contains</form:option>
+   								<form:option value="Greater">&gt;</form:option>
+   								<form:option value="Samller">&lt;</form:option>
+   								<form:option value="Range">Range</form:option>
+   								<form:option value="Type">Type</form:option>  	
+							</form:select> 
+							
 						</div>
 					</div>
     			</td> 
@@ -192,11 +195,13 @@
 					<div id = "dropholder" class = "inline" style="margin-right: 60px;">
   						<p class = "dropP">And/Or</p>
 						<div class="dropdown">
-  						<button class="dropbtn">&nbsp;&nbsp;</button>
- 				 			<div class="dropdown-content">
- 				 			    <a href="#">And</a>
-    							<a href="#">Or</a> 							
-  							</div>
+
+  							<form:select class="dropSelect" name="select" path="phone">
+								<form:option value = "default" selected disabled hidden></form:option>
+   								<form:option value="And">And</form:option>
+   								<form:option value="Or">Or</form:option>	
+							</form:select> 
+
 						</div>
 					</div> 
     			</td>
@@ -210,8 +215,7 @@
   			</tr>
   			
 			</table>
-			
-			
+			 --%>
 			<!-- result -->
 			<div class="container">
 

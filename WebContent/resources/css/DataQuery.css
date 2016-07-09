@@ -1,15 +1,5 @@
 @CHARSET "UTF-8";
 
-.dropbtn {
-    background-color: #ffb81a;
-    color: white;
-    font-size: 16px;
-    border: none;    
-    cursor: pointer;
-    font-family: helvetica-w01-light,helvetica-w02-light,sans-serif; 
-    
-}
-
 .dropSelect {
 	
    	background-color: #8963B7;
@@ -25,7 +15,7 @@
 	background-color: #8963B7;
   	width: 190px;
   	height: 40px;
-	margin: 20px 0 0 0; /* top right bottom left*/
+	margin: 0 0 0 20px; /* top right bottom left*/
   	padding:0 0 0 10px;
   	border-radius:5px;
   	font-family: helvetica-w01-light,helvetica-w02-light,sans-serif; 
@@ -42,38 +32,9 @@
   	padding:10px 0 10px 0; 	
   	border-radius:0 5px 5px 0;
   	border-left:1px solid #ffffff;
-  	text-align: left;
+  	text-align: right;
   	position: relative;
 }
-
-/* .dropdown:after{
-  content:"▾";
-  font-size: 18px;
-  position: absolute;
-  left:100px;
-  top:7px;
-  display: block;
-} */
-
- .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    text-align: center;
-    z-index:100;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1;}
-
 
 .dropP{
   	float: left;
@@ -86,8 +47,12 @@
 #inputField{
 	width: 190px;
   	height: 40px;
-	margin: 30px 0 0 0; /* top right bottom left*/
+	margin: 2px 0 0 20px; /* top right bottom left*/
   	font-family: helvetica-w01-light,helvetica-w02-light,sans-serif; 
+}
+
+.backgroundDropdown{
+	background-color: #ea808f;
 }
 
 input[type="text"] {
@@ -150,7 +115,7 @@ input[type="text"] {
 	color: #ffffff;
 	border-radius:5px;
 	border: none;
-	margin: 20px 10px 20px 10px;
+	margin: 20px 0 20px 50px;
 	padding: 10px 30px 10px 30px;
 	font-family: helvetica-w01-light,helvetica-w02-light,sans-serif; 
 	font-size: 16px;

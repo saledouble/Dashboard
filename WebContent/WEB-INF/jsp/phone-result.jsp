@@ -11,7 +11,13 @@
 <h1>Phone result page</h1>
 Selected phone:
 <br/>
-${smartphone.phone}
+
+${queryValue.select}
+${queryValue.field}
+${queryValue.constraintValue}
+${queryValue.logic}
+
+<%-- ${smartphone.phone} --%>
 <br/>
 <a href="${pageContext.request.contextPath}/">Main page</a>
 </body>

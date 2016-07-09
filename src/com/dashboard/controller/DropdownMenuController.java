@@ -35,16 +35,28 @@ public class DropdownMenuController {
 		//return "hellopage";
 	}
 	
-	@RequestMapping(value="/phone-option-page",method=RequestMethod.POST)  
+	@RequestMapping(value="/phone-option-page",method=RequestMethod.GET)  
 	public ModelAndView optionTag(){
 		return new ModelAndView("phone-option-form", "smartphone", new Smartphone()); 
 
 	}
 	
+//	@RequestMapping(value="/index",method=RequestMethod.POST)  
+//	public ModelAndView form(){
+//		return new ModelAndView("phone-option-form", "smartphone", new Smartphone()); 
+//
+//	}
+	
+	@RequestMapping(value="/dashboardPage",method=RequestMethod.GET)  
+	public ModelAndView dashboardOptionTag(){
+		return new ModelAndView("dashboard", "queryValue", new QueryValue()); 
+
+	}
+	
     @RequestMapping(value="/phone-result")  
-    private ModelAndView processPhone(@ModelAttribute Smartphone smartphone) {  
+    private ModelAndView processPhone(@ModelAttribute QueryValue queryValue) {  
         ModelAndView mav = new ModelAndView("phone-result");  
-        mav.addObject("smartphone", smartphone);          
+        mav.addObject("queryValue", queryValue);          
         return mav;  
     }  
 	

@@ -8,7 +8,11 @@
 .font_4 {font: normal normal normal 25px/1.4em museo-slab-w01-100,serif ;color:#353535;font-weight: bold;}
 .font_5 {font: normal normal normal 20px/1.4em museo-slab-w01-100,serif ;color:#353535;font-weight: bold;}
 .font_6 {font-family: Blippo, fantasy;font-size: 60px;}
-.font_7 {font-family: Blippo, fantasy;font-size: 30px;margin-left: 60px; text-align:left;color:#5B3481;}
+.font_7 {font-family: Blippo, fantasy;font-size: 20px;margin-left: 60px; text-align:left;color:#5B3481;}
+.font_8 {font: normal normal normal 15px/1.4em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif ;
+margin: 20px 0 0 60px; text-align:left; color:#5B3481;}
+.font_9 {font: normal normal normal 15px/1.4em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif ;
+margin: 20px 0 0 60px; text-align:left; color:#c97e87;}
 
 .color_1 {color: #6B6B2E;}
 .color_2 {color: #3284A8;}
