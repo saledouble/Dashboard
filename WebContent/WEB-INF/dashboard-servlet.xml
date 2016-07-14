@@ -17,5 +17,29 @@
 	<property name="prefix" value="/WEB-INF/jsp/"></property>
 	<property name="suffix" value=".jsp"></property>
 	</bean>
+	
+	<!-- Initialization for data source -->
+    <bean id="dataSource" 
+      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+      <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+      <property name="url" value="jdbc:mysql://localhost:3306/table_db"/>
+      <property name="username" value="root"/>
+      <property name="password" value="dashboard"/>
+   </bean> 
+	
+	
+	<!-- Definition for tableJDBCTemplate bean -->
+    <bean id="tableJDBCTemplate" 
+      class="com.dashboard.dao.TableJDBCTemplate">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean> 
+      
+      
+    <!-- declare spring DAO -->
+<!--  	<bean id="queryDAO" class="com.dashboard.dao.QueryDAO"></bean> 
+    declare spring Service
+     <bean id="service" class="com.dashboard.service.Service">
+        <property name="queryDAO" ref="queryDAO"></property>
+    </bean>  -->
  
 </beans>

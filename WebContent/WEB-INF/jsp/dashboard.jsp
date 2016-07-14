@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	String path = request.getContextPath();
@@ -17,22 +18,84 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
- $(document).ready(function(){
-    $("#select").click(function(){
-       /*  $("#cellConstraints").hide(); */
-    	$("p").hide();
-    });
+function selectDropdown() {
+    loc = document.getElementById('select');
     
-});
-/* 
+    if (loc.value == 'Table' || loc.value == 'Number') {
+    	$("#cellConstraints").hide();
+    }
+    if (loc.value == 'Cell') {
+    	$("#cellConstraints").show();
+    }
+}
+
+function logicTableDropdown() {
+    loc = document.getElementById('logic');
+    
+    if (loc.value == 'And' || loc.value == 'Or') {
+        var $table = $("#tableConstraints"),
+        lastRow = $table.find("tr:last-child");
+
+    	$table.append(lastRow.clone());
+    } 
+    
+}
+
+</script>
+
+<script>
+function logicCellDropdown() {
+    loc = document.getElementById('logicCell');
+    
+    if (loc.value == 'And' || loc.value == 'Or') {
+        var $table = $("#cellConstraints"),
+        lastRow = $table.find("tr:last-child");
+
+    	$table.append(lastRow.clone());
+    }
+}
+</script>
+
+<script type="text/javascript" src="<%=path %>/resources/js/tabs.js" ></script>
+
+<script>
+
 $(document).ready(function(){
-    $("#hide").click(function(){
-        $("p").hide();
-    });
-    $("#show").click(function(){
-        $("p").show();
-    });
-}); */
+	$(".tableResult").click(function(e){
+		var tab_id = $("#tab-2-li").attr('data-tab');
+
+		$('ul.tabs li').removeClass('current');
+		$('.tab-content').removeClass('current');
+
+		$("#tab-2-li").addClass('current');
+		$("#tab-2").addClass('current');
+	});
+
+});
+</script>
+
+<script>
+$(document).ready(function() {
+  $(".textResultTable tr:even").css("background-color", "#F0EEF1");
+  $(".textResultTable tr:odd").css("background-color", "#fff");
+/*   $(".textResultTable a").css("color", "#642EFE");
+  $(".textResultTable a:visited").css("color", "#B07784"); */
+})
+</script>
+
+<script>
+function addItemToCard(PMCID,tableOrder){
+	  
+	 $.ajax({
+	      type: "POST",
+	      url: "dashboardPage",
+	      data: {"PMCID":PMCID, "tableOrder":tableOrder},
+		  success:function(response){
+		      alert("Added successfully");
+		  }
+	 });
+
+	}
 </script>
 
 
@@ -53,8 +116,8 @@ $(document).ready(function(){
  		<!-- body content -->
 		<div class = "div13">
 		
-			<form:form method="POST" commandName="queryValue" action="phone-result.html">
-			<table style="width:100%">
+			<form:form commandName="queryValue">
+			<table style="width:100%;" id="tableConstraints">
   			<tr>
     			<td>
 					<!-- select drop-down menu -->
@@ -62,11 +125,11 @@ $(document).ready(function(){
   					<p class = "dropP">Select&nbsp;&nbsp;</p>
 						<div class="dropdown">
 
-							<form:select id = "select" class="dropSelect" name="select" path="select">
-   								<form:option value="Defalut">&nbsp;</form:option>
+							<form:select class="dropSelect" id="select" name="select" path="select" onchange="selectDropdown()">
+   								<form:option value="default">&nbsp;</form:option>
    								<form:option value="Table">Table</form:option>
-   								<form:option id = "selectCell" value="Cell">Cell</form:option>
-   								<form:option value="Number">Number</form:option>
+   								<form:option value="Cell">Cell</form:option>
+   								<form:option value="Number">Number</form:option> 
 							</form:select> 
 					
 						</div> 
@@ -85,20 +148,20 @@ $(document).ready(function(){
   			
   			<!-- constraint Table-->
   			<tr>
-  			<td><p class = "font_8">Table contraints:</p></td>
+  			<td><p class = "font_8">Table constraints:</p></td>
   			<td></td>
   			<td></td>
   			<td></td>
   			</tr>
-  			<tr>
+  			<tr id = "tableConstraintOption">
    				<td>
    					<!-- field drop-down menu -->
 					<div id = "dropholder" style="margin-left: 60px;">
   						<p class = "dropP">&nbsp;Field&nbsp;&nbsp;</p>
 						<div class="dropdown">
 						
-   							<form:select class="dropSelect" name="select" path="field">
-   								<form:option value="Defalut">&nbsp;</form:option>
+   							<form:select class="dropSelect" path="field">
+   								<form:option value="default">&nbsp;</form:option>
    								<form:option value="Cell">Cell</form:option>
    								<form:option value="Caption">Caption</form:option>
    								<form:option value="Stub">Stub</form:option>
@@ -112,14 +175,17 @@ $(document).ready(function(){
 						</div>
 					</div>
    				</td>
-    			<td>
+   				<td></td>
+  			<td></td>
+  			<td></td>
+    			<%-- <td>
     				<!-- operations drop-down menu -->
 					<div id = "dropholder">
   						<p class = "dropP">OPS&nbsp;&nbsp;&nbsp;&nbsp;</p>
 						<div class="dropdown">
   							
    							<form:select class="dropSelect" name="select" path="operations">
-								<form:option value="Defalut">&nbsp;</form:option>
+								<form:option value="default">&nbsp;</form:option>
    								<form:option value="Contains">Contains</form:option>
    								<form:option value="Greater">&gt;</form:option>
    								<form:option value="Samller">&lt;</form:option>
@@ -143,25 +209,28 @@ $(document).ready(function(){
   						<p class = "dropP">And/Or</p>
 						<div class="dropdown">
 
-   							<form:select class="dropSelect" name="select" path="logic" >
-   								<form:option value="Defalut">&nbsp;</form:option>
+   							 <form:select class="dropSelect" name="select" path="logic" id="logic" onchange="logicTableDropdown()">
+   								<form:option value="default">&nbsp;</form:option>
    								<form:option value="And">And</form:option>
    								<form:option value="Or">Or</form:option>	
 							</form:select> 
  
 						</div>
 					</div> 
-    			</td>
-  			</tr><!-- constraint table end -->
+    			</td> --%>
+  			</tr>
+  			</table><!-- constraint table end -->
+  			
   			
   			<!-- constriant cell -->
-  			<tr id= "cellConstraints">
+	 	<%-- <table style="display: none;" id = "cellConstraints" > 
+  			<tr>
   			<td><p class = "font_9">Cell contraints:</p></td>
   			<td></td>
   			<td></td>
   			<td></td>
   			</tr>
-  			<tr>
+  			<tr id = "cellConstraintOption">
    				<td>
    					<!-- field drop-down menu -->
 					<div id = "dropholder" style="margin-left: 60px;background-color: #ea808f;">
@@ -169,7 +238,7 @@ $(document).ready(function(){
 						<div class="dropdown">
 						
    							<form:select class="dropSelect backgroundDropdown" name="select" path="field">
-   								<form:option value="Defalut">&nbsp;</form:option>
+   								<form:option value="default">&nbsp;</form:option>
    								<form:option value="Cell">Cell</form:option>
    								<form:option value="Caption">Caption</form:option>
    								<form:option value="Stub">Stub</form:option>
@@ -190,7 +259,7 @@ $(document).ready(function(){
 						<div class="dropdown">
   							
    							<form:select class="dropSelect backgroundDropdown" name="select" path="operations">
-								<form:option value="Defalut">&nbsp;</form:option>
+								<form:option value="default">&nbsp;</form:option>
    								<form:option value="Contains">Contains</form:option>
    								<form:option value="Greater">&gt;</form:option>
    								<form:option value="Samller">&lt;</form:option>
@@ -214,8 +283,8 @@ $(document).ready(function(){
   						<p class = "dropP">And/Or</p>
 						<div class="dropdown">
 
-   							<form:select class="dropSelect backgroundDropdown" name="select" path="logic" >
-   								<form:option value="Defalut">&nbsp;</form:option>
+   							<form:select class="dropSelect backgroundDropdown" name="select" path="logic" id="logicCell" onchange="logicCellDropdown()">
+   								<form:option value="default">&nbsp;</form:option>
    								<form:option value="And">And</form:option>
    								<form:option value="Or">Or</form:option>	
 							</form:select> 
@@ -224,19 +293,77 @@ $(document).ready(function(){
 					</div> 
     			</td>
   			</tr>
+  			</table>  --%>
   			<!-- constraint cell end -->
   			
+  			<table>
   			<tr>
-  				<td></td>
-  				<td></td>
-  				<td></td>
   				<td>
-  				<input  id="fileButton" style="margin-right:50px;" type="submit" name="submit" value="Submit& Run"></td>
+  				<a class="fileButton" style="margin-left:635px;" href="${pageContext.request.contextPath}/dashboardPage" class="button">Clear</a>
+
+  				<td>
+  				<input  class="fileButton" style="margin-left:20px;" type="submit" name="submit" value="Submit& Run"></td>
   			</tr>
   			
 			</table>
 			
 			</form:form>
+			
+			<div> <!-- query result -->
+			
+<%-- <br/>
+
+select: ${queryValue.select}
+<br/>
+field: ${queryValue.field}
+<br/>
+ops: ${queryValue.operations }
+<br/>
+constraints: ${queryValue.constraintValue}
+<br/>
+logic: ${queryValue.logic}
+<br/>  --%>
+
+			
+			<!-- result -->
+			<div class="container">
+
+				<ul class="tabs">
+					<li class="tab-link current" data-tab="tab-1">Result</li>
+					<li class="tab-link" data-tab ="tab-2" id="tab-2-li">Text</li>
+				</ul>
+
+				<div id="tab-1" class="tab-content current"> <!-- table result -->
+					
+					<c:if test="${not empty tables}">
+					
+
+					<table class= "textResultTable">
+
+						<c:forEach var="table" items="${tables}">
+						<tr>
+							<td><a href= "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC${table.pmcid}" target="_blank">${table.pmcid}</a></td>
+                			<td>${table.tableCaption}</td>
+                			<td><%-- <a class="tableResult">${table.tableOrder}</a> --%>
+                				<a href="javascript:addItemToCart(${table.pmcid},${table.tableOrder} });" class="tableResult">${table.tableOrder}</a>
+                			</td> 
+						</tr>
+						</c:forEach>
+						
+					</table>
+
+					</c:if> 
+						
+					
+				</div>
+				<div id="tab-2" class="tab-content">
+		 			Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</div>
+
+			</div> <!-- result tabs end -->		
+					
+			</div>
+			
 		</div>
 	</div>
 </body>

@@ -110,7 +110,7 @@ input[type="text"] {
 	margin: 5px;
 }
 
-#fileButton{
+.fileButton{
 	background-color: #8963B7;
 	color: #ffffff;
 	border-radius:5px;
@@ -119,6 +119,7 @@ input[type="text"] {
 	padding: 10px 30px 10px 30px;
 	font-family: helvetica-w01-light,helvetica-w02-light,sans-serif; 
 	font-size: 16px;
+	text-decoration:none;
 }
 
 
@@ -145,6 +146,7 @@ ul.tabs li{
 	border-top-left-radius:5px;
 	border-top-right-radius:5px;
 }
+
 .tab-link.current{background-color: #8963B7;}
 .tab-link{background-color: #b6b6b6;}
 
@@ -153,8 +155,8 @@ ul.tabs li{
 	padding: 15px;
 	border: 1px solid #8963B7;
 	background-color: #fff;
-	height: 400px;
-	
+	height: 700px;
+	overflow-y: scroll;
 }
 
 .tab-content.current{
