@@ -12,6 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="<%=path %>/resources/css/Dashboard.css" />
 <link rel="stylesheet" type="text/css" href="<%=path %>/resources/css/DataQuery.css" />
+<link rel="stylesheet" type="text/css" href="<%=path %>/resources/css/TextResult.css" />
 
 
 <title>Web-based Dashboard</title>
@@ -84,18 +85,26 @@ $(document).ready(function() {
 </script>
 
 <script>
-function addItemToCard(PMCID,tableOrder){
-	  
-	 $.ajax({
-	      type: "POST",
-	      url: "dashboardPage",
-	      data: {"PMCID":PMCID, "tableOrder":tableOrder},
-		  success:function(response){
-		      alert("Added successfully");
-		  }
-	 });
+function myFuncton(tableOrder,PMCID){
+	
+ 	 /* alert(tableOrder + "  " +PMCID);  */
 
-	}
+ 	$.ajax({
+		url: 'dashboardAjax',
+		data: {
+ 	   		PMCID: PMCID
+ 	   	},
+ 	   	success: function(data) {
+ 	   		
+ 	   		/* alert("tableOrder: "+tableOrder); */
+ 	   		
+ 			$('#tab-2').html($(data).find("label:contains("+tableOrder+")").parent());
+ 		 
+ 	   },
+ 	   type: 'POST'
+ 	});
+
+}
 </script>
 
 
@@ -110,6 +119,8 @@ function addItemToCard(PMCID,tableOrder){
 		<a href="author.jsp" ><div class = "div5">Author</div></a>
 		</div>
 	</div>
+	
+<!-- 	<div id="test"></div> -->
 
 	<div class = "div12">
 	
@@ -344,8 +355,8 @@ logic: ${queryValue.logic}
 						<tr>
 							<td><a href= "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC${table.pmcid}" target="_blank">${table.pmcid}</a></td>
                 			<td>${table.tableCaption}</td>
-                			<td><%-- <a class="tableResult">${table.tableOrder}</a> --%>
-                				<a href="javascript:addItemToCart(${table.pmcid},${table.tableOrder} });" class="tableResult">${table.tableOrder}</a>
+                			<td><%-- <a class="tableResult">${table.tableOrder}</a> --%><%-- ${table.pmcid},${table.tableOrder} --%>
+                				<a onclick="myFuncton('${table.tableOrder}','${table.pmcid}');" class="tableResult">${table.tableOrder}</a>
                 			</td> 
 						</tr>
 						</c:forEach>
@@ -357,14 +368,14 @@ logic: ${queryValue.logic}
 					
 				</div>
 				<div id="tab-2" class="tab-content">
-		 			Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				</div>
 
-			</div> <!-- result tabs end -->		
+		 		</div>
+
+			</div> <!-- result tabs end -->				
 					
-			</div>
+			</div> <!-- query result end -->
 			
-		</div>
-	</div>
+		</div> <!-- body content end -->
+	</div> <!-- div12 end -->
 </body>
 </html>

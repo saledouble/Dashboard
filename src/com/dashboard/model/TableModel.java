@@ -1,5 +1,10 @@
 package com.dashboard.model;
 
+/**
+ * This class saves the model of table
+ * @author Grace Tang
+ *
+ */
 public class TableModel {
 	// When the users select table option
 	// the SELECT statement in the query should be like this:

@@ -34,12 +34,10 @@
       <property name="dataSource"  ref="dataSource" />    
    </bean> 
       
-      
-    <!-- declare spring DAO -->
-<!--  	<bean id="queryDAO" class="com.dashboard.dao.QueryDAO"></bean> 
-    declare spring Service
-     <bean id="service" class="com.dashboard.service.Service">
-        <property name="queryDAO" ref="queryDAO"></property>
-    </bean>  -->
+   	<!-- Definition for tableJDBCTemplate bean -->
+    <bean id="textResultJDBCTemplate" 
+      class="com.dashboard.dao.TextResultJDBCTemplate">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean> 
  
 </beans>

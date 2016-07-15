@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+
+#tab-2 label {
+   font-family: "Roboto", helvetica, arial, sans-serif;
+   font-size: 20px;
+   font-weight: bold;
+   color: #5e3c87;  
+}
+
+#tab-2 p{
+	font-family: "Roboto", helvetica, arial, sans-serif;
+   	font-size: 16px;
+   	color: #5e3c87; 
+}
+
+#tab-2 table-wrap-foot{
+	font-family: "Roboto", helvetica, arial, sans-serif;
+   	font-size: 16px;
+   	color: #5e3c87; 
+}
+
+/*** Table Styles **/
+
+/* #tab-2 tr:nth-child(even) {background: #F0EEF1;}
+#tab-2 tr:nth-child(odd) {background: #FFF;} */
