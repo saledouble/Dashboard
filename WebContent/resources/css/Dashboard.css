@@ -105,12 +105,13 @@ margin: 20px 0 0 60px; text-align:left; color:#c97e87;}
 .div12{
 	margin:0 auto;
 	width: 980px; height: 1500px; 
+	top: 55px;
 }
 
 /* Set the body of index.jsp*/
 .div13{
 	background-color: rgb(242, 240, 240);
-	top: 55px; 
+/* top: 55px; */ 
 	width: 980px; height: 1412px;
 	text-align: center;
 }

@@ -1,21 +1,17 @@
 package com.dashboard.model;
 
-public class QueryValue {
+/**
+ * This class stores the user's options about cell constraints
+ * @author Grace Tang
+ *
+ */
+public class QueryItemCell {
 	
-	private String select;
-	String field;
-	String operations;
-	String constraintValue;
-	String logic;
+	private String field;
+	private String operations;
+	private String constraintValue;
+	private String logic;
 	
-	public String getSelect(){
-		return select;
-	}
-	
-	public void setSelect(String select){
-		this.select = select;
-	}
-
 	public String getField(){
 		return this.field;
 	}
@@ -47,6 +43,6 @@ public class QueryValue {
 	
 	public void setLogic(String logic){
 		this.logic = logic;
-	}
-	
+	}	
+
 }
