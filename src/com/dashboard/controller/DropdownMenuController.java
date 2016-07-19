@@ -65,14 +65,21 @@ public class DropdownMenuController {
 		
 		System.out.println("table size: "+queryItem.getTableList().size());
 		
-		////test
-		System.out.println("select:" + queryItem.getSelect() +"\n"
-			+ "field: " +queryItem.getTableList().get(0).getField()+"\n"
-			+ "operations: " + queryItem.getTableList().get(0).getOperations()+"\n"
-			+ "constraints: " + queryItem.getTableList().get(0).getConstraintValue()+"\n"
-			+ "logic: " + queryItem.getTableList().get(0).getLogic());
+		////test print
+		System.out.println("select:" + queryItem.getSelect() +"\n");
+		for(int i= 0 ;i < queryItem.getTableList().size(); ++i){
+		System.out.println( "field: " +queryItem.getTableList().get(i).getField()+"\n"
+			+ "operations: " + queryItem.getTableList().get(i).getOperations()+"\n"
+			+ "constraints: " + queryItem.getTableList().get(i).getConstraintValue()+"\n"
+			+ "logic: " + queryItem.getTableList().get(i).getLogic());
+		}
 		
-		System.out.println("field: " +queryItem.getCellList().get(0).getField());
+		for(int i= 0 ;i < queryItem.getTableList().size(); ++i){
+		System.out.println( "Cell field: " +queryItem.getCellList().get(i).getField()+"\n"
+			+ "Cell operations: " + queryItem.getCellList().get(i).getOperations()+"\n"
+			+ "Cell constraints: " + queryItem.getCellList().get(i).getConstraintValue()+"\n"
+			+ "Cell logic: " + queryItem.getCellList().get(i).getLogic());
+		}
 
 		
 		return mav; 

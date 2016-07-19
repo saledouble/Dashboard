@@ -281,9 +281,16 @@ function myFuncton(tableOrder,PMCID){
                 </tbody>
             </table>
             
+            <a href="#" id="addQueryItem">Add test</a>
+            
+            
   			<!-- constraint cell -->
   		
 	 		<table style="display: none;" id = "cellConstraints" > 
+	 		<thead>
+            </thead>
+            
+            <tbody id="queryItemCell">
   			<tr>
   			<td><p class = "font_9">Cell contraints:</p></td>
   			<td></td>
@@ -357,7 +364,7 @@ function myFuncton(tableOrder,PMCID){
     			</td>
     			
     			<td>
-                	<a href="#" class="removeQueryItem">
+                	<a href="#" class="removeQueryItemCell">
 						<img class = "queryItemDelete" alt="" src="resources/img/delete.png" />
 					</a>
                 </td>
@@ -365,11 +372,35 @@ function myFuncton(tableOrder,PMCID){
   			</tr>
   			</c:forEach>
   			
+  			<tr>
+  				<td>
+  					<a href="#" id="addQueryItemCell">test add</a>
+  				</td>
+  			</tr>
+  			
+  			</tbody>
   			</table> <!-- constraint cell end -->
             
-            <input type="submit" value="Save" id="submit" />&nbsp;&nbsp;
+            <!-- <input type="submit" value="Save" id="submit" />&nbsp;&nbsp;
             <a href="#" id="addQueryItem">Add Person</a>&nbsp;&nbsp;
-            <a href="?f=">Reset List</a>
+            <a href="?f=">Reset List</a> -->
+            
+            
+            
+            
+            <table>
+  			<tr>
+  				<td>
+  				<a class="fileButton" style="margin-left:565px;" href="${pageContext.request.contextPath}/dashboardPage" class="button">Clear</a>
+				</td>
+				
+  				<td>
+  				<input  class="fileButton" style="margin-left:20px;" type="submit" value="Submit& Run"></td>
+  				
+  			</tr>
+  			
+			</table>
+            
         </form:form>
         
         
@@ -395,22 +426,45 @@ function myFuncton(tableOrder,PMCID){
              function beforeSubmit() {
                 return true;
             } 
+             
+             $(document).ready( function() {
+                 var config = {
+                     rowClass : 'queryItemTable',
+                     addRowId : 'addQueryItem',
+                     removeRowClass : 'removeQueryItem',
+                     formId : 'queryItemForm',
+                     rowContainerId : 'queryItem',
+                     indexedPropertyName : 'tableList',
+                     indexedPropertyMemberNames : 'field,operations,constraintValue,logic',
+                     rowAddedListener : rowAdded,
+                     rowRemovedListener : rowRemoved,
+                     beforeSubmit : beforeSubmit
+                 };
+                 new DynamicListHelper(config);
+             });
  
-            $(document).ready( function() {
+/*             $(document).ready( function() {
                 var config = {
                     rowClass : 'queryItemTable',
+                    rowClassCell : 'queryItemCell', 
+                    
                     addRowId : 'addQueryItem',
+                    addRowIdCell : 'addQueryItemCell', 
+                    
                     removeRowClass : 'removeQueryItem',
                     formId : 'queryItemForm',
                     rowContainerId : 'queryItem',
+                    
                     indexedPropertyName : 'tableList',
+                    indexedPropertyNameCell : 'cellList',
+                    
                     indexedPropertyMemberNames : 'field,operations,constraintValue,logic',
                     rowAddedListener : rowAdded,
                     rowRemovedListener : rowRemoved,
                     beforeSubmit : beforeSubmit
                 };
                 new DynamicListHelper(config);
-            });
+            }); */
             
         </script>
         
