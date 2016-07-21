@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dashboard.dao.TableJDBCTemplate;
 import com.dashboard.dao.TextResultJDBCTemplate;
+import com.dashboard.model.CellModel;
 import com.dashboard.model.QueryItem;
 import com.dashboard.model.QueryItemCell;
 import com.dashboard.model.QueryItemTable;
@@ -57,14 +58,44 @@ public class DropdownMenuController {
 	public ModelAndView dashboardOption(@ModelAttribute QueryItem queryItem){
 		
 		ModelAndView mav = new ModelAndView("dashboard"); 
-		List<TableModel> tables = tableJDBCTemplate.getItems();
-		
-		mav.addObject("tables", tables);
 		
 		mav.addObject("queryItem", queryItem); 
 		
-		System.out.println("table size: "+queryItem.getTableList().size());
+		QueryGenerator queryGenerator = new QueryGenerator(queryItem);
+
+		///// test print
+//		System.out.println("query: "+ queryGenerator.getQuery());
 		
+		if (!queryGenerator.getCorrectInput()){
+			mav.addObject("errorInput", true);
+			
+		}else {
+			mav.addObject("errorInput", false);
+			switch(queryItem.getSelect()){
+				case "Table":  
+					List<TableModel> tables = tableJDBCTemplate.getItems(queryGenerator.getQuery());
+					mav.addObject("tables", tables);
+					break;
+				
+				case "Cell":
+					List<CellModel> cells = tableJDBCTemplate.getCellItems(queryGenerator.getQuery());
+					mav.addObject("cells", cells);
+					break;
+				
+				case "Number":
+					
+					int number = tableJDBCTemplate.getCount(queryGenerator.getQuery());
+
+//					System.out.println("number: "+ number);
+					
+					mav.addObject("number", number);
+					break;
+				
+			
+			}
+			
+		}
+				
 		////test print
 		System.out.println("select:" + queryItem.getSelect() +"\n");
 		for(int i= 0 ;i < queryItem.getTableList().size(); ++i){
@@ -74,7 +105,7 @@ public class DropdownMenuController {
 			+ "logic: " + queryItem.getTableList().get(i).getLogic());
 		}
 		
-		for(int i= 0 ;i < queryItem.getTableList().size(); ++i){
+		for(int i= 0 ;i < queryItem.getCellList().size(); ++i){
 		System.out.println( "Cell field: " +queryItem.getCellList().get(i).getField()+"\n"
 			+ "Cell operations: " + queryItem.getCellList().get(i).getOperations()+"\n"
 			+ "Cell constraints: " + queryItem.getCellList().get(i).getConstraintValue()+"\n"
@@ -104,7 +135,6 @@ public class DropdownMenuController {
 
 	 }
 	
-	
 	/**
 	 * initialize the queryItem
 	 * @return
@@ -119,6 +149,18 @@ public class DropdownMenuController {
 
         return new QueryItem (tableList,cellList);
     }
-	
-	
+    
+//    @RequestMapping("/download.do")
+//    private ModelAndView saveTofile(@ModelAttribute QueryItem queryItem){
+//    	
+//    	System.out.println("download "+ queryItem.getSelect());
+//    	
+//    	ModelAndView mav = new ModelAndView("queryDepository");
+//    	mav.addObject("queryItem",queryItem);
+//    	
+//    	return mav;
+//    }
+//	
+    
+    
 }

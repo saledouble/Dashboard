@@ -12,5 +12,7 @@ public interface QueryDAO{
 	 */
 	public void setDataSource(DataSource ds);
 	
-	public List getItems();
+	public List getItems(String query);
+
+	public List getCellItems(String query);
 }

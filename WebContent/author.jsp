@@ -11,9 +11,25 @@
 	<!-- header -->
 	<div class = "div2" >
 		<div class = "div6">
-		<a href="index.jsp" ><div class = "div5">Dashboard</div></a>
-		<a href="use.jsp" ><div class = "div5">Use</div></a>
-		<a href="author.jsp" ><div class = "div51">Author</div></a>
+		<table>
+			<tr>
+				<td>
+					<img id = "imgUniversityIcon" alt="" src="resources/img/universityIcon.png" />
+				</td>
+				<td>
+					<a href="${pageContext.request.contextPath}/"><img id = "homeIcon"  alt="" src="resources/img/home.png" /></a>
+				</td>
+				<td>
+					<a class = "div5" href="dashboardPage" >Dashboard</a>
+				</td>
+				<td>
+					<a class = "div5" href="use.jsp" >Use</a>
+				</td>
+				<td>
+					<a class = "div5" href="author.jsp" >Author</a>
+				</td>
+			</tr>
+		</table>
 		</div>
 	</div>
 	
@@ -26,20 +42,19 @@
 		
 		<hr id ="authorHr"/>
 		
-		<!-- add image -->
-		<div  class = "div7">
-			<img id = "imgAuthor" alt="" src="resources/img/photo.jpg" />
-		</div>
-		
-		<!-- add text -->
-		<div class = "div8">
-		<p class="font_1">Hi, I am Grace Tang, also called&nbsp;Yiming Tang which is my Chinese name.</p>
-		<p class="font_1">&nbsp;</p>
-		<p class="font_1">I am a Chinese programmer and a student in&nbsp;the University of Manchester.</p>
-		<p class="font_1">&nbsp;</p>
-		<p class="font_1">If you have any advice about this&nbsp;dashboard,&nbsp;</p>
-		<p class="font_1">please sent an e-mail to&nbsp;saledouble@qq.com.</p>
-		</div>
+		<table id = "authorTable">
+			<tr>
+				<td>
+					<img id = "imgAuthor" alt="" src="resources/img/photo.jpg" />
+				</td>
+				<td>
+					<p class="font_13">Hi, I am Grace Tang, also called&nbsp;Yiming Tang which is my Chinese name. <br/><br/>
+					I am a Chinese programmer and a student in&nbsp;the University of Manchester. <br/><br/>
+					If you have any advice about this dashboard, please sent an e-mail to saledouble@qq.com.</p>
+				</td>
+			</tr>
+		</table>
+
 		
 		<hr id ="authorHr"/>
 	</div> <!-- body end -->

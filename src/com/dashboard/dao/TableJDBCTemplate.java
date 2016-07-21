@@ -4,15 +4,15 @@ import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.dashboard.controller.CellMapper;
 import com.dashboard.controller.TableMapper;
+import com.dashboard.model.CellModel;
 import com.dashboard.model.TableModel;
 
 public class TableJDBCTemplate implements QueryDAO {
    private DataSource dataSource;
    private JdbcTemplate jdbcTemplateObject;
-   
-//   private String query = "SELECT distinct PMCID, TableOrder, TableCaption FROM clinicTable ";
-   
+  
    public void setDataSource(DataSource dataSource) {
       this.dataSource = dataSource;
       this.jdbcTemplateObject = new JdbcTemplate(dataSource);
@@ -28,17 +28,28 @@ public class TableJDBCTemplate implements QueryDAO {
 
 
    @Override
-   public List getItems() {
-	   //  String SQL = "select * from Student where id = ?";
-	   String query = "SELECT distinct PMCID, TableOrder, TableCaption FROM clinicTable WHERE Content like \"%exe%\"; ";
-  
+   public List getItems(String query) {
+
 	   System.out.println("query: " + query);
-  
-	   //  TableModel tabel = jdbcTemplateObject.queryForObject(query, new Object[]{}, new TableMapper());
-	   //  return tabel;
   
 	   List<TableModel> tables = jdbcTemplateObject.query(query, new TableMapper());
 	   return tables;
+   }
+   
+   @Override
+   public List getCellItems(String query) {
+
+	   System.out.println("query: " + query);
+  
+	   List<CellModel> cells = jdbcTemplateObject.query(query, new CellMapper());
+	   return cells;
+   }
+   
+   
+   public int getCount(String query){
+		int total = jdbcTemplateObject.queryForInt(query);
+		
+		return total;
    }
 
 

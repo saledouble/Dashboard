@@ -35,34 +35,6 @@ function selectDropdown() {
 $(document).ready(selectDropdown);
 </script>
 
-<script>
-/* cell logic dropdown menu event*/
-/* function logicCellDropdown() {
-    loc = document.getElementById('logicCell');
-    
-    if (loc.value == 'And' || loc.value == 'Or') {
-        var $table = $("#cellConstraints"),
-        lastRow = $table.find("tr:last-child");
-
-    	$table.append(lastRow.clone());
-    }
-}  */
-</script>
-
-<script>
-/* table logic dropdown menu event*/
-/* function logicTableDropdown() {
-    loc = document.getElementById('logic');
-    
-    if (loc.value == 'And' || loc.value == 'Or') {
-        var $table = $("#tableConstraints"),
-        lastRow = $table.find("tr:last-child");
-
-    	$table.append(lastRow.clone());
-    }
-}  */
-</script>
-
 <script type="text/javascript" src="<%=path %>/resources/js/tabs.js" ></script>
 <script type="text/javascript" src="<%=path %>/resources/js/dynamic_list_helper.js" ></script>
 
@@ -84,6 +56,7 @@ $(document).ready(function(){
 </script>
 
 <script>
+/* Set the background of tables*/
 $(document).ready(function() {
   $(".textResultTable tr:even").css("background-color", "#F0EEF1");
   $(".textResultTable tr:odd").css("background-color", "#fff");
@@ -116,22 +89,94 @@ function myFuncton(tableOrder,PMCID){
 }
 </script>
 
+<script>
+function logicSelect($value) {
+	
+	if($value == 'And' || $value == 'Or')
+	alert($value);
+}
+</script>
+
+
 </head>
 <body id="indexBackground">
 
 	<!-- header -->
-	<div class = "div2" >
+	<div class = "div2" style = "width: 980px;">
 		<div class = "div6">
-		<a href="index.jsp" ><div class = "div51">Dashboard</div></a>
-		<a href="use.jsp" ><div class = "div5">Use</div></a>
-		<a href="author.jsp" ><div class = "div5">Author</div></a>
+		<table>
+			<tr>
+				<td>
+					<img id = "imgUniversityIcon" alt="" src="resources/img/universityIcon.png" />
+				</td>
+				<td>
+					<a href="${pageContext.request.contextPath}/"><img id = "homeIcon"  alt="" src="resources/img/home.png" /></a>
+				</td>
+				<td>
+					<a class = "div5" href="dashboardPage" >Dashboard</a>
+				</td>
+				<td>
+					<a class = "div5" href="use.jsp" >Use</a>
+				</td>
+				<td>
+					<a class = "div5" href="author.jsp" >Author</a>
+				</td>
+			</tr>
+		</table>
 		</div>
 	</div>
 
-	<div class = "div12">
+	<div class = "div17">
 	
  		<!-- body content -->
-		<div class = "div13">
+		<div class = "div18">
+			<br/>	
+			<p class="font_7" >Query history:</p>
+			<table id="queryTable" class = "tableBody">
+    		<thead>
+    			<tr>
+    				<th width = "50px"></th>
+        			<th width = "150px">select</th>
+            		<th>Constraints</th>
+            		<th width = "100px">Query</th>
+        		</tr>
+    		</thead>
+    		<tbody>
+    			<tr>
+    				<td><img id = "deleteImg" alt="" src="resources/img/delete.png" /></td>
+        			<td>Stephen C. Cox</td>
+            		<td>$300</td>
+            		<td><button id ="runQuery">Run</button></td>
+        		</tr>
+        		<tr>
+        			<td><img id = "deleteImg" alt="" src="resources/img/delete.png" /></td>
+        			<td>Josephin Tan</td>
+            		<td>$150</td>
+            		<td><button id="runQuery">Run</button></td>
+        		</tr>
+        		<tr>
+        			<td><img id = "deleteImg" alt="" src="resources/img/delete.png" /></td>
+        			<td>Josephin Tan</td>
+            		<td>$150</td>
+            		<td><button id="runQuery">Run</button></td>
+        		</tr>
+        		<tr>
+        			<td><img id = "deleteImg" alt="" src="resources/img/delete.png" /></td>
+        			<td>Josephin Tan</td>
+            		<td>$150</td>
+            		<td><button id="runQuery">Run</button></td>
+        		</tr>
+   			 </tbody>
+   			 <tfoot>
+   			 	<tr>
+					<td width="660px"></td>
+					<td><button class ="fileButton">Import</button></td>
+					<td><a class ="fileButton" href="download.do">Save</a></td>
+				</tr>
+   			 </tfoot>
+			</table>
+			
+			<hr id ="indexHr"/>
 		
 		<form:form modelAttribute="queryItem" method="post" id="queryItemForm">
             <table>
@@ -158,7 +203,8 @@ function myFuncton(tableOrder,PMCID){
 						</td>
 						<td></td>
 						<td></td>
-						<td></td>	
+						<td>
+						</td>	
 						<td></td> 		
                 		
                 	</tr>
@@ -209,7 +255,7 @@ function myFuncton(tableOrder,PMCID){
 										<form:option value="default">&nbsp;</form:option>
    										<form:option value="Contains">Contains</form:option>
    										<form:option value="Greater">&gt;</form:option>
-   										<form:option value="Samller">&lt;</form:option>
+   										<form:option value="Smaller">&lt;</form:option>
    										<form:option value="Range">Range</form:option>
    										<form:option value="Type">Type</form:option>  	
 									</form:select>  
@@ -232,7 +278,7 @@ function myFuncton(tableOrder,PMCID){
   									<p class = "dropP">And/Or</p>
 									<div class="dropdown">
 
-   									<form:select class="dropSelect"  path="tableList[${i.index}].logic" id="logic${i.index}" >
+   									<form:select class="dropSelect logicSelect"  path="tableList[${i.index}].logic" id="logic${i.index}"  used = "false">
    										<form:option value="default">&nbsp;</form:option>
    										<form:option value="And">And</form:option>
    										<form:option value="Or">Or</form:option>	
@@ -244,7 +290,7 @@ function myFuncton(tableOrder,PMCID){
                            
                             
                             <td>
-                            	<a href="#" class="removeQueryItem">
+                            	<a class="removeQueryItem">
 									<img class = "queryItemDelete" alt="" src="resources/img/delete.png" />
 								</a>
                             </td>
@@ -281,7 +327,7 @@ function myFuncton(tableOrder,PMCID){
                 </tbody>
             </table>
             
-            <a href="#" id="addQueryItem">Add test</a>
+            <!-- <a href="#" id="addQueryItem">Add test</a> -->
             
             
   			<!-- constraint cell -->
@@ -290,7 +336,7 @@ function myFuncton(tableOrder,PMCID){
 	 		<thead>
             </thead>
             
-            <tbody id="queryItemCell">
+            <tbody id="queryItemCellContainer">
   			<tr>
   			<td><p class = "font_9">Cell contraints:</p></td>
   			<td></td>
@@ -331,7 +377,7 @@ function myFuncton(tableOrder,PMCID){
 								<form:option value="default">&nbsp;</form:option>
    								<form:option value="Contains">Contains</form:option>
    								<form:option value="Greater">&gt;</form:option>
-   								<form:option value="Samller">&lt;</form:option>
+   								<form:option value="Smaller">&lt;</form:option>
    								<form:option value="Range">Range</form:option>
    								<form:option value="Type">Type</form:option>  	
 							</form:select>  
@@ -343,7 +389,7 @@ function myFuncton(tableOrder,PMCID){
     				<!--input the value  -->
 					<div id = "inputField">
 						
-						<form:input path="cellList[${i.index}].constraintValue" id="constraintValue${i.index}"/>
+						<form:input path="cellList[${i.index}].constraintValue" id="constraintValue${i.index}" />
 						
 					</div> 
     			</td>
@@ -381,21 +427,17 @@ function myFuncton(tableOrder,PMCID){
   			</tbody>
   			</table> <!-- constraint cell end -->
             
-            <!-- <input type="submit" value="Save" id="submit" />&nbsp;&nbsp;
-            <a href="#" id="addQueryItem">Add Person</a>&nbsp;&nbsp;
-            <a href="?f=">Reset List</a> -->
-            
-            
-            
-            
             <table>
   			<tr>
+  				<td width= "510">
+  				</td>
   				<td>
-  				<a class="fileButton" style="margin-left:565px;" href="${pageContext.request.contextPath}/dashboardPage" class="button">Clear</a>
+  					<a class="fileButton" style="background-color: #FA58AC; " href="${pageContext.request.contextPath}/dashboardPage" class="button">Clear</a>
 				</td>
 				
   				<td>
-  				<input  class="fileButton" style="margin-left:20px;" type="submit" value="Submit& Run"></td>
+  					<input  class="fileButton" style="margin-left:20px;" type="submit" value="Submit& Run">
+				</td>
   				
   			</tr>
   			
@@ -430,11 +472,20 @@ function myFuncton(tableOrder,PMCID){
              $(document).ready( function() {
                  var config = {
                      rowClass : 'queryItemTable',
+                     rowClassCell : 'queryItemCell',
+                     
                      addRowId : 'addQueryItem',
+                     addRowIdCell : 'addQueryItemCell', 
+                     
                      removeRowClass : 'removeQueryItem',
+                     removeRowClassCell : 'removeQueryItemCell',
+                     
                      formId : 'queryItemForm',
                      rowContainerId : 'queryItem',
+                     rowContainerIdCell : 'queryItemCellContainer',
+                     
                      indexedPropertyName : 'tableList',
+                     indexedPropertyNameCell : 'cellList',
                      indexedPropertyMemberNames : 'field,operations,constraintValue,logic',
                      rowAddedListener : rowAdded,
                      rowRemovedListener : rowRemoved,
@@ -442,235 +493,9 @@ function myFuncton(tableOrder,PMCID){
                  };
                  new DynamicListHelper(config);
              });
- 
-/*             $(document).ready( function() {
-                var config = {
-                    rowClass : 'queryItemTable',
-                    rowClassCell : 'queryItemCell', 
-                    
-                    addRowId : 'addQueryItem',
-                    addRowIdCell : 'addQueryItemCell', 
-                    
-                    removeRowClass : 'removeQueryItem',
-                    formId : 'queryItemForm',
-                    rowContainerId : 'queryItem',
-                    
-                    indexedPropertyName : 'tableList',
-                    indexedPropertyNameCell : 'cellList',
-                    
-                    indexedPropertyMemberNames : 'field,operations,constraintValue,logic',
-                    rowAddedListener : rowAdded,
-                    rowRemovedListener : rowRemoved,
-                    beforeSubmit : beforeSubmit
-                };
-                new DynamicListHelper(config);
-            }); */
             
-        </script>
-        
-        
-		
-		
-		
-		<%-- 
-			<form:form commandName="queryItem">
-			<table style="width:100%;" id="tableConstraints">
-  			<tr>
-    			<td>
-					<!-- select drop-down menu -->
-					<div id = "dropholder" style="margin: 20px 0 0 60px;">
-  					<p class = "dropP">Select&nbsp;&nbsp;</p>
-						<div class="dropdown">
-							
-								<form:select class="dropSelect" id="select" path="select" onchange="selectDropdown()">
-   									<form:option value="default">&nbsp;</form:option>
-   									<form:option value="Table">Table</form:option>
-   									<form:option value="Cell">Cell</form:option>
-   									<form:option value="Number">Number</form:option> 
-								</form:select> 
-							
-						</div> 
-
-					</div> 	 		
-
-    			</td>
-    			<td>
-    			</td>
-    			
-    			<td>	
-    			</td>
-    			<td>
-    			</td>
-  			</tr>
-  			
-  			<!-- constraint Table-->
-  			<tr>
-  			<td><p class = "font_8">Table constraints:</p></td>
-  			<td></td>
-  			<td></td>
-  			<td></td>
-  			</tr>
-  			<tr id = "tableConstraintOption">
- 
-   				<td>
-   					<!-- field drop-down menu -->
-					<div id = "dropholder" style="margin-left: 60px;">
-  						<p class = "dropP">&nbsp;Field&nbsp;&nbsp;</p>
-						<div class="dropdown">
-
-   							<form:select class="dropSelect" path="field">
-   								<form:option value="default">&nbsp;</form:option>
-   								<form:option value="Cell">Cell</form:option>
-   								<form:option value="Caption">Caption</form:option>
-   								<form:option value="Stub">Stub</form:option>
-   								<form:option value="Super-row">Super-row</form:option>
-   								<form:option value="Header">Header</form:option>
-   								<form:option value="Footer">Footer</form:option>
-   								<form:option value="Row">Row</form:option>
-   								<form:option value="Column">Column</form:option>
-							</form:select> 
-
-						</div>
-					</div>
-   				</td>
-   				
-    			<td>
-    				<!-- operations drop-down menu -->
-					<div id = "dropholder">
-  						<p class = "dropP">OPS&nbsp;&nbsp;&nbsp;&nbsp;</p>
-						<div class="dropdown">
-  							
-   							<form:select class="dropSelect" path="operations">
-								<form:option value="default">&nbsp;</form:option>
-   								<form:option value="Contains">Contains</form:option>
-   								<form:option value="Greater">&gt;</form:option>
-   								<form:option value="Samller">&lt;</form:option>
-   								<form:option value="Range">Range</form:option>
-   								<form:option value="Type">Type</form:option>  	
-							</form:select>  
-							
-						</div>
-					</div>
-    			</td> 
-    			<td>
-    				<!--input the value  -->
-					<div id = "inputField">
-						<!-- <input type="text" placeholder=":constraints"> -->
-						<form:input path="constraintValue" />
-					</div> 
-    			</td>
-    			<td>
-    				<!-- And/Or drop-down menu -->
-					<div id = "dropholder" class = "inline" style="margin-right: 60px;">
-  						<p class = "dropP">And/Or</p>
-						<div class="dropdown">
-
-   							 <form:select class="dropSelect"  path="logic" id="logic" onchange="logicTableDropdown()">
-   								<form:option value="default">&nbsp;</form:option>
-   								<form:option value="And">And</form:option>
-   								<form:option value="Or">Or</form:option>	
-							</form:select> 
- 
-						</div>
-					</div> 
-
-    			</td> 
-  			</tr>
-
-  			</table><!-- constraint table end -->
-  			
-  			
-  			<!-- constraint cell -->
-  		
-	 		<table style="display: none;" id = "cellConstraints" > 
-  			<tr>
-  			<td><p class = "font_9">Cell contraints:</p></td>
-  			<td></td>
-  			<td></td>
-  			<td></td>
-  			</tr>
-  			<tr id = "cellConstraintOption">
-   				<td>
-   					<!-- field drop-down menu -->
-					<div id = "dropholder" style="margin-left: 60px;background-color: #ea808f;">
-  						<p class = "dropP">&nbsp;Field&nbsp;&nbsp;</p>
-						<div class="dropdown">
+        </script>		
 						
-   							<form:select class="dropSelect backgroundDropdown" path="cellField">
-   								<form:option value="default">&nbsp;</form:option>
-   								<form:option value="Cell">Cell</form:option>
-   								<form:option value="Caption">Caption</form:option>
-   								<form:option value="Stub">Stub</form:option>
-   								<form:option value="Super-row">Super-row</form:option>
-   								<form:option value="Header">Header</form:option>
-   								<form:option value="Footer">Footer</form:option>
-   								<form:option value="Row">Row</form:option>
-   								<form:option value="Column">Column</form:option>
-							</form:select> 
-
-						</div>
-					</div>
-   				</td>
-    			<td>
-    				<!-- operations drop-down menu -->
-					<div id = "dropholder" style="background-color: #ea808f;">
-  						<p class = "dropP">OPS&nbsp;&nbsp;&nbsp;&nbsp;</p>
-						<div class="dropdown">
-  							
-   							<form:select class="dropSelect backgroundDropdown" path="cellOperations">
-								<form:option value="default">&nbsp;</form:option>
-   								<form:option value="Contains">Contains</form:option>
-   								<form:option value="Greater">&gt;</form:option>
-   								<form:option value="Samller">&lt;</form:option>
-   								<form:option value="Range">Range</form:option>
-   								<form:option value="Type">Type</form:option>  	
-							</form:select>  
-							
-						</div>
-					</div>
-    			</td> 
-    			<td>
-    				<!--input the value  -->
-					<div id = "inputField">
-						<!-- <input type="text" placeholder=":constraints"> -->
-						<form:input path="cellConstraintValue" />
-					</div> 
-    			</td>
-    			<td>
-    				<!-- And/Or drop-down menu -->
-					<div id = "dropholder" class = "inline" style="margin-right: 60px;background-color: #ea808f;">
-  						<p class = "dropP">And/Or</p>
-						<div class="dropdown">
-
-   							<form:select class="dropSelect backgroundDropdown" path="cellLogic" id="logicCell" onchange="logicCellDropdown()">
-   								<form:option value="default">&nbsp;</form:option>
-   								<form:option value="And">And</form:option>
-   								<form:option value="Or">Or</form:option>	
-							</form:select> 
- 
-						</div>
-					</div> 
-    			</td>
-  			</tr>
-  			</table> <!-- constraint cell end -->
-  		
-  			
-  			<table>
-  			<tr>
-  				<td>
-  				<a class="fileButton" style="margin-left:635px;" href="${pageContext.request.contextPath}/dashboardPage" class="button">Clear</a>
-
-  				<td>
-  				<input  class="fileButton" style="margin-left:20px;" type="submit" value="Submit& Run"></td>
-  			</tr>
-  			
-			</table>
-			
-			</form:form> --%>
-			
-			
-			
-			
 			<div> <!-- query result -->
 			
 			<div class="container">
@@ -686,21 +511,81 @@ function myFuncton(tableOrder,PMCID){
 					
 
 					<table class= "textResultTable">
-
+						<thead>
+							<tr>
+							<th>PMCID</th>
+							<th>Table caption</th>
+							<th>Table order</th>
+							</tr>
+						</thead>
+						<tbody>
 						<c:forEach var="table" items="${tables}">
 						<tr>
 							<td><a href= "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC${table.pmcid}" target="_blank">${table.pmcid}</a></td>
                 			<td>${table.tableCaption}</td>
-                			<td>
+                			<td width="70">
                 				<a onclick="myFuncton('${table.tableOrder}','${table.pmcid}');" class="tableResult">${table.tableOrder}</a>
                 			</td> 
 						</tr>
 						</c:forEach>
-						
+						</tbody>
 					</table>
 
 					</c:if> 
-						
+					
+					<!-- number result -->
+					<c:if test="${not empty number}">
+						<p>${number}</p>
+					</c:if>  
+					
+					<!-- cell result -->
+					<c:if test="${not empty cells}">					
+
+					<table class= "textResultTable">
+						<thead>
+							<tr>
+							<th>PMCID</th>
+							<th>Table order</th>
+							<th>Row No.</th>
+							<th>Column No.</th>
+							<th>Header</th>
+							<th>Stub</th>
+							<th>Super-row</th>
+							<th>Content</th>
+							</tr>
+						</thead>
+						<tbody>
+						<c:forEach var="cell" items="${cells}">
+						<tr>
+							<td><a href= "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC${cell.pmcid}" target="_blank">${cell.pmcid}</a></td>
+                			<td width="70">
+                				<a onclick="myFuncton('${cell.tableOrder}','${cell.pmcid}');" class="tableResult">${cell.tableOrder}</a>
+                			</td> 
+                			<td width="70">
+                				${cell.rowN}
+                			</td>
+                			<td width="70">
+                				${cell.columnN}
+                			</td>
+                			<td width="200">
+                				${cell.wholeHeader}
+                			</td>
+                			<td width="200">
+                				${cell.wholeStub}
+                			</td>
+                			<td width="200">
+                				${cell.wholeSuperRow}
+                			</td>
+                			<td width="300">
+                				${cell.content}
+                			</td>
+                			
+						</tr>
+						</c:forEach>
+						</tbody>
+					</table>
+
+					</c:if> 
 					
 				</div>
 				<div id="tab-2" class="tab-content">
@@ -711,6 +596,12 @@ function myFuncton(tableOrder,PMCID){
 					
 			</div> <!-- query result end -->
 			
+			<c:if test="${errorInput}">
+			<script>
+  				alert("Sorry. You should accomplish all input.");        
+			</script>
+			</c:if>
+			
 		</div> <!-- body content end -->
 		
 		<!-- footer -->
@@ -719,6 +610,6 @@ function myFuncton(tableOrder,PMCID){
 		</div> <!-- footer end -->
 	
 		
-	</div> <!-- div12 end -->
+	</div> <!-- div17 end -->
 </body>
 </html>

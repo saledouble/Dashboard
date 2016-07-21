@@ -65,16 +65,31 @@ function DynamicListHelper( config ) {
     
     function init() {
         config.rowClass = makeClass(config.rowClass);
+        config.rowClassCell = makeClass(config.rowClassCell);
+        
         config.addRowId = makeId(config.addRowId);
+        config.addRowIdCell = makeId(config.addRowIdCell);
+        
         config.removeRowClass = makeClass(config.removeRowClass);
+        config.removeRowClassCell = makeClass(config.removeRowClassCell);
+        
         config.formId = makeId(config.formId);
+        
         config.rowContainerId = makeId(config.rowContainerId);
-
+        config.rowContainerIdCell = makeId(config.rowContainerIdCell);
+        
         addRemoveRowListener();
         addAddRowListener();
+        
+        addRemoveCellRowListener();
+        addAddCellRowListener();
+        
         prepRows();
+        prepRowsCell();
+        
         $(config.formId).submit( function() {
             prepFormForSubmit();
+            prepFormForSubmitCell();
             if( config.beforeSubmit != null ) {
                 return config.beforeSubmit();
             } else {
@@ -102,6 +117,18 @@ function DynamicListHelper( config ) {
             });
         }
     }
+    function prepFormForSubmitCell() {
+        var memberArray = config.indexedPropertyMemberNames.split(',');
+        for( var i in memberArray ) {
+            var className = '.DynamicListHelperCell_' + $.trim(memberArray[i]);
+            var index = 0;
+            $(className).each( function(){
+                $(this).attr('name',config.indexedPropertyNameCell + "["+index+"]." + $.trim(memberArray[i]));
+                index++;
+            });
+        }
+    }
+    
     
     function prepRows() {
         var memberArray = config.indexedPropertyMemberNames.split(',');
@@ -119,6 +146,22 @@ function DynamicListHelper( config ) {
             });
         }
     }
+    function prepRowsCell() {
+        var memberArray = config.indexedPropertyMemberNames.split(',');
+        for( var i in memberArray ) {
+            var s = config.indexedPropertyNameCell + "[";
+            var e = "]." + $.trim(memberArray[i]);
+            $(config.rowContainerIdCell).find('*').each( function(){
+                if( $(this).attr('name') ) {
+                    var bs = ($(this).attr('name').indexOf(s) === 0);
+                    var be = ($(this).attr('name').match( e+"$" ) != null);
+                    if( bs && be ) {
+                        $(this).addClass('DynamicListHelperCell_'+ $.trim(memberArray[i]));
+                    }
+                }
+            });
+        }
+    }
     
     function removeRow(element) {
         lastRow = $(config.formId).find(config.rowClass+":last").clone(true);
@@ -128,25 +171,40 @@ function DynamicListHelper( config ) {
             config.rowRemovedListener(element);
         }
     }
+    function removeRowCell(element) {
+        lastRow = $(config.formId).find(config.rowClassCell+":last").clone(true);
+        $(element).closest(config.rowClassCell).remove();
+        prepFormForSubmitCell();
+        if( config.rowRemovedListener != null ) {
+            config.rowRemovedListener(element);
+        }
+    }
+    
     
     function addRow() {
         var row = $(config.formId).find(config.rowClass+":last").clone(true);
         if( !row.length )
             row  = lastRow;
-//        if(typeof $(row).attr('id') !== 'undefined') {
-//            $(row).attr('id', $(row).attr('id')+'_1' );
-//        }
-//        $(row).find('*').each(function(){
-//            if(typeof $(this).attr('id') !== 'undefined') {
-//                $(this).attr('id', $(this).attr('id')+'_1');
-//            }
-//        });
+        
+        row.find('.logicSelect').attr("used", "false");
+
         $(config.rowContainerId).append(row);
         prepFormForSubmit();
         if( config.rowAddedListener != null ) {
             config.rowAddedListener($(row));
         }
     }
+    function addCellRow() {
+        var row = $(config.formId).find(config.rowClassCell+":last").clone(true);
+        if( !row.length )
+            row  = lastRow;
+        $(config.rowContainerIdCell).append(row);
+        prepFormForSubmit();
+        if( config.rowAddedListener != null ) {
+            config.rowAddedListener($(row));
+        }
+    }
+    
     
     function addRemoveRowListener() {
         $(config.removeRowClass).click( function(){
@@ -154,12 +212,43 @@ function DynamicListHelper( config ) {
            return false;
         });
     }
+    function addRemoveCellRowListener() {
+        $(config.removeRowClassCell).click( function(){
+           removeRowCell($(this).closest(config.rowClassCell)); 
+           return false;
+        });
+    }
+    
+    
+//    function addAddRowListener() {
+//        $(config.addRowId).click( function(){
+//            addRow();
+//            return false;
+//        });
+//    }
+ 
     function addAddRowListener() {
-        $(config.addRowId).click( function(){
-            addRow();
+    	
+    	$(".logicSelect").change( function(){
+//			  alert($(this).attr("used"));
+		  if(($(this).val() == 'And' || $(this).val() == 'Or') && $(this).attr("used") == 'false'){
+			  $(this).attr("used", "true");
+			  addRow();
+		  }
+	     return false;
+	  });
+	}
+    
+    
+    function addAddCellRowListener() {
+        $(config.addRowIdCell).click( function(){
+            addCellRow();
             return false;
         });
     }
+    
+    
+    
     
     function makeClass(className) {
         if( className.indexOf('.') != 0 )

@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-.font_1 {font: normal normal normal 15px/1.4em helvetica-w01-light,helvetica-w02-light,sans-serif;color:#353535;} 
+.font_1 {font-size: 18px;color:#fff;text-decoration: none;} 
 .font_2 {font: normal normal normal 60px/1.4em museo-slab-w01-100,serif ;color:#6B6B2E;} 
 
 .font_3 {
@@ -8,15 +8,24 @@
 .font_4 {font: normal normal normal 25px/1.4em museo-slab-w01-100,serif ;color:#353535;font-weight: bold;}
 .font_5 {font: normal normal normal 20px/1.4em museo-slab-w01-100,serif ;color:#353535;font-weight: bold;}
 .font_6 {font-family: Blippo, fantasy;font-size: 60px;}
-.font_7 {font-family: Blippo, fantasy;font-size: 20px;margin-left: 60px; text-align:left;color:#5B3481;}
+.font_7 {font-size: 20px;margin-left: 60px; text-align:left;color:#5B3481; margin-top: 0em;}
 .font_8 {font: normal normal normal 15px/1.4em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif ;
 margin: 20px 0 0 60px; text-align:left; color:#5B3481;}
 .font_9 {font: normal normal normal 15px/1.4em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif ;
 margin: 20px 0 0 60px; text-align:left; color:#c97e87;}
+.font_10 {font-size: 30px;margin:10px 0 0 60px; text-align:left;color:#5B3481;}
+.font_11 {font-size: 30px;margin:30px 0 0 60px; text-align:left;color:#5B3481;}
+.font_12 {font-size: 18px;text-decoration: none;color: #404040;} 
+.font_13 {font-size: 18px;text-decoration: none;color: #404040;text-align: left;margin-left: 10px;} 
 
 .color_1 {color: #6B6B2E;}
 .color_2 {color: #3284A8;}
 .color_3 {color: #666666;}
+
+h3{
+	color: #fff;
+	padding: 20px 10px 10px 15px;
+    }
 
 /* Set the main div of author.jsp*/
 .div1{
@@ -25,7 +34,7 @@ margin: 20px 0 0 60px; text-align:left; color:#c97e87;}
 }
 
 .div2{
-	top: 0px; width: 980px; height: 55px;
+	top: 0px; height: 105px;
 	background-color: #ffffff;
 	margin:0 auto;
 }	
@@ -35,52 +44,44 @@ margin: 20px 0 0 60px; text-align:left; color:#c97e87;}
 	top: 55px; width: 980px; height: 634px;
 	overflow:hidden;
 	background-color: rgba(255, 255, 255, 0.6);
+	
 	} 
 
 /* Set style of footer*/
 .div4{
-	width: 980px;height: 88px; bottom: auto; top: 689px;
+	width: 980px;height: 88px; bottom: auto; top: 739px;
 	background-color: #ffffff;
 	text-align: right;
 	padding-top: 20px;
 }
 
 .div5{ 
-	padding-right: 15px;
-	display:inline-block;  
-    _display:inline;  
-    *display:inline;  
-    color:#6B6B2E;
-    }
-
-.div51{ 
-	padding-right: 15px;
-	display:inline-block;  
-    _display:inline;  
-    *display:inline;  
-    color:#5B3481;
-    }    
+    color:#848484;
+    font-size: 20px;
+    text-decoration:none;
+	margin: 0 30px 0 0;
+    }  
  
-.div6{ text-align:center; clear:both;padding-top: 30px;}
+.div6{ width: 980px; padding-top: 20px; margin: auto;}
 
 /* set style of img*/
-.div7{
+/* .div7{
 	padding-right: 15px;
 	display:inline-block;  
     _display:inline;  
     *display:inline;  
 	width:193px;height:193px;
-	}
+	} */
 
 /* Set the text div of author.jsp*/
-.div8{
+/* .div8{
 	display:inline-block;  
     _display:inline;  
     *display:inline;  
 	width:360px;height:300px;
 	text-align:left;
 }
-
+ */
 /* Set the main div of use.jsp*/
 .div9{
   	margin:0 auto;
@@ -97,14 +98,14 @@ margin: 20px 0 0 60px; text-align:left; color:#c97e87;}
 
 /* Set the body content of use.jsp*/
 .div11{
-	margin-right: 30px;
-	margin-left: 30px;
+	margin-right: 60px;
+	margin-left: 60px;
 }
 
 /* Set the main div of index.jsp*/
 .div12{
 	margin:0 auto;
-	width: 980px; height: 1500px; 
+	width: 980px; height: 900px; 
 	top: 55px;
 }
 
@@ -112,19 +113,112 @@ margin: 20px 0 0 60px; text-align:left; color:#c97e87;}
 .div13{
 	background-color: rgb(242, 240, 240);
 /* top: 55px; */ 
-	width: 980px; height: 1412px;
+	width: 980px; height: 812px;
 	text-align: center;
 }
 
+.div141{
+	background-color:#393a3c;
+	text-align: left;
+	
+	width: 351px;
+	height: 288px;
+	
+	margin: 0 20px 0 60px;
+}
+
+.div141 p{
+	padding: 0 10px 40px 15px;
+	line-height: 150%;
+	font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+	font-weight: normal;
+	
+}
+
+.div141 a{
+	
+	padding: 0px 10px 10px 15px;
+	line-height: 150%;
+	font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+}
+
+.div142{
+
+	text-align: left;
+    
+	width: 401px;
+	height: 288px;
+	
+ 	background-color: hsl(2, 57%, 40%); 
+	background-image: repeating-linear-gradient(transparent, transparent 50px, rgba(0,0,0,.4) 50px, rgba(0,0,0,.4) 53px, transparent 53px, transparent 63px, rgba(0,0,0,.4) 63px, rgba(0,0,0,.4) 66px, transparent 66px, transparent 116px, rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px),
+	repeating-linear-gradient(270deg, transparent, transparent 50px, rgba(0,0,0,.4) 50px, rgba(0,0,0,.4) 53px, transparent 53px, transparent 63px, rgba(0,0,0,.4) 63px, rgba(0,0,0,.4) 66px, transparent 66px, transparent 116px, rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px),
+	repeating-linear-gradient(125deg, transparent, transparent 2px, rgba(0,0,0,.2) 2px, rgba(0,0,0,.2) 3px, transparent 3px, transparent 5px, rgba(0,0,0,.2) 5px);
+	
+}
+
+.div142 p{
+	padding: 0 10px 40px 15px;
+	line-height: 150%;
+	font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+	font-weight: normal;
+	
+}
+
+.div142 a{
+	
+	padding: 0px 10px 10px 15px;
+	line-height: 150%;
+	font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+}
+
+.div143{
+	width:430px;
+	height:288px;
+	
+	text-align: left;
+	margin: 0 20px 0 60px;
+	background-color: #6b2c91;
+}
+
+.div143 p{
+	padding: 10px 10px 10px 15px;
+	line-height: 150%;
+	font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+	font-weight: normal;
+}
+
+.div143 a{
+	padding: 20px 10px 10px 15px;
+	line-height: 150%;
+	font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+	color: #ffc42f;
+}
+
+
 /* Set the text div of index.jsp */
 .div14{
-	display:inline-block;  
-    _display:inline;  
-    *display:inline;  
-	width:510px;height:200px;
+	width:480px;
+	height:288px;
+	
 	text-align: left;
 	margin-right: 30px;
+	background-color: #6b2c91;
 }
+
+.div14 p{
+	padding: 10px 10px 10px 15px;
+	line-height: 150%;
+	font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+	font-weight: normal;
+}
+
+.div14 a{
+	padding: 20px 10px 10px 15px;
+	line-height: 150%;
+	font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+	color: #ffc42f;
+}
+
 
 /* Set the img div of index.jsp*/
 .div15{	
@@ -137,6 +231,25 @@ margin: 20px 0 0 60px; text-align:left; color:#c97e87;}
 /* Set the body content of index.jsp*/
 .div16{	padding-top: 30px;}
 
+
+
+/* Set the main of dashboard.jsp*/
+.div17{
+	margin:0 auto;
+	width: 980px; height: 1500px; 
+	top: 55px;
+}
+
+/* Set the body of dashboard.jsp*/
+.div18{
+	background-color: rgb(242, 240, 240);
+	width: 980px; height: 1412px;
+	text-align: center;
+}
+
+
+
+
 #authorHr{ width: 60%; color: black;height:1px;}
 #indexHr{
 	border: 0; 
@@ -148,7 +261,18 @@ margin: 20px 0 0 60px; text-align:left; color:#c97e87;}
 }
 
 #imgAuthor{width: 193px; height: 193px; object-fit: cover;}
-#imgUniversityIcon{width: 300px; height: 170px; object-fit: cover;}
+#imgUniversityIcon{
+	width: 150px; 
+	height: 60px; 
+	object-fit: cover; 
+	margin: 0px 120px 0px 60px;}
+
+/* #imgUniversity{
+	width: 400px; 
+	height: 500px;
+	margin-left: 30px;
+	} */
+
 
 .bodyBackground{
  	background-color: rgb(169, 146, 222); 
@@ -168,13 +292,24 @@ margin: 20px 0 0 60px; text-align:left; color:#c97e87;}
 #pictureStrip{ 
     background-image:url('../img/background.png');
     background-color:rgb(169, 146, 222);
-    height:320px;
+    height:400px;
     width:100%;
     margin:0 auto; 
     text-align: center;
     vertical-align: middle;
-    line-height: 320px; 
+    line-height: 400px; 
 }
 
+#homeIcon{
+	margin-right: 40px;
+	width: 25px; 
+	height:20px; 
+}
 
-
+#authorTable{
+	width: 60%;
+	margin: auto;
+	
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
