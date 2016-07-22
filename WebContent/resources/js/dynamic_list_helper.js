@@ -198,6 +198,9 @@ function DynamicListHelper( config ) {
         var row = $(config.formId).find(config.rowClassCell+":last").clone(true);
         if( !row.length )
             row  = lastRow;
+        
+        row.find('.logicSelectCell').attr("used", "false");
+        
         $(config.rowContainerIdCell).append(row);
         prepFormForSubmit();
         if( config.rowAddedListener != null ) {
@@ -218,19 +221,11 @@ function DynamicListHelper( config ) {
            return false;
         });
     }
-    
-    
-//    function addAddRowListener() {
-//        $(config.addRowId).click( function(){
-//            addRow();
-//            return false;
-//        });
-//    }
  
     function addAddRowListener() {
     	
     	$(".logicSelect").change( function(){
-//			  alert($(this).attr("used"));
+
 		  if(($(this).val() == 'And' || $(this).val() == 'Or') && $(this).attr("used") == 'false'){
 			  $(this).attr("used", "true");
 			  addRow();
@@ -241,10 +236,14 @@ function DynamicListHelper( config ) {
     
     
     function addAddCellRowListener() {
-        $(config.addRowIdCell).click( function(){
-            addCellRow();
-            return false;
-        });
+    	$(".logicSelectCell").change( function(){
+
+		  if(($(this).val() == 'And' || $(this).val() == 'Or') && $(this).attr("used") == 'false'){
+			  $(this).attr("used", "true");
+			  addCellRow();
+		  }
+	     return false;
+	  });
     }
     
     

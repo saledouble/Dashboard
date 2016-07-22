@@ -97,6 +97,7 @@ public class DropdownMenuController {
 		}
 				
 		////test print
+		System.out.println();
 		System.out.println("select:" + queryItem.getSelect() +"\n");
 		for(int i= 0 ;i < queryItem.getTableList().size(); ++i){
 		System.out.println( "field: " +queryItem.getTableList().get(i).getField()+"\n"

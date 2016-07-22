@@ -9,14 +9,15 @@
 .font_5 {font: normal normal normal 20px/1.4em museo-slab-w01-100,serif ;color:#353535;font-weight: bold;}
 .font_6 {font-family: Blippo, fantasy;font-size: 60px;}
 .font_7 {font-size: 20px;margin-left: 60px; text-align:left;color:#5B3481; margin-top: 0em;}
-.font_8 {font: normal normal normal 15px/1.4em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif ;
-margin: 20px 0 0 60px; text-align:left; color:#5B3481;}
-.font_9 {font: normal normal normal 15px/1.4em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif ;
+.font_8 {font: normal normal normal 17px/1.4em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif ;
+margin: 20px 0 0 60px; text-align:left; color:#7C34A3;}
+.font_9 {font: normal normal normal 17px/1.4em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif ;
 margin: 20px 0 0 60px; text-align:left; color:#c97e87;}
 .font_10 {font-size: 30px;margin:10px 0 0 60px; text-align:left;color:#5B3481;}
 .font_11 {font-size: 30px;margin:30px 0 0 60px; text-align:left;color:#5B3481;}
 .font_12 {font-size: 18px;text-decoration: none;color: #404040;} 
 .font_13 {font-size: 18px;text-decoration: none;color: #404040;text-align: left;margin-left: 10px;} 
+.font_14 {font-weight: bold;font-size: 16px;} 
 
 .color_1 {color: #6B6B2E;}
 .color_2 {color: #3284A8;}
@@ -236,14 +237,14 @@ h3{
 /* Set the main of dashboard.jsp*/
 .div17{
 	margin:0 auto;
-	width: 980px; height: 1500px; 
+	width: 980px; /* height: 1600px; */ 
 	top: 55px;
 }
 
 /* Set the body of dashboard.jsp*/
 .div18{
 	background-color: rgb(242, 240, 240);
-	width: 980px; height: 1412px;
+	width: 980px; /* height: 1512px; */
 	text-align: center;
 }
 
@@ -284,7 +285,7 @@ h3{
 }
 
 #indexBackground{
-	background-color: rgb(194, 196, 196);
+	background-color: #d8d8d8;
 	margin: 0;
     padding: 0;
 }

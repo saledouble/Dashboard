@@ -3,23 +3,14 @@ package com.dashboard.model;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
-public class QueryItem {
-	
-    @XmlElementWrapper(name="cell-list")
-    @XmlElement(name="cell")
+public class QueryItem {	
+
 	private List<QueryItemCell> cellList= new LinkedList<QueryItemCell>();
-    
-    
-    @XmlElementWrapper(name="table-list")
-    @XmlElement(name="table")
+
 	private List<QueryItemTable> tableList= new LinkedList<QueryItemTable>();
 	
-	private String select;
+	private String select = "default";
 	
 	public QueryItem(){
 		

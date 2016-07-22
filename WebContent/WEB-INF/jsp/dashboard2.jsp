@@ -38,27 +38,30 @@
 
 		$('.radioSelect').click(function(){
 			if($(this).val() == "Table" || $(this).val() == "Number" ){
-				$("#cellConstraints").hide();		
+				$("#cellConstraints").hide();
 			}
 			
 			if($(this).val() == "Cell" ){
 				$("#cellConstraints").show();
 			}
 		});
+		
 	})
 </script>
 
 
+<!-- <script>
+$(document).ready(selectDropdown);
+</script> -->
 
 <script type="text/javascript" src="<%=path %>/resources/js/tabs.js" ></script>
 <script type="text/javascript" src="<%=path %>/resources/js/dynamic_list_helper.js" ></script>
 
 
 <script>
-
+/* tab action*/
 $(document).ready(function(){
-	/* tab action*/
-	$(".tableResult").click(function(){
+	$(".tableResult").click(function(e){
 		var tab_id = $("#tab-2-li").attr('data-tab');
 
 		$('ul.tabs li').removeClass('current');
@@ -67,13 +70,6 @@ $(document).ready(function(){
 		$("#tab-2-li").addClass('current');
 		$("#tab-2").addClass('current');
 	});
-	
-	
-	/* remove a history in the table*/
-	
-	  $(".removeHistory").click(function(){
-	      $(this).closest('tr').remove();
-	    });
 
 });
 </script>
@@ -91,6 +87,8 @@ $(document).ready(function() {
 <script>
 /**get the article of the selected table and capture the table**/
 function myFuncton(tableOrder,PMCID){
+	
+ 	 /* alert(tableOrder + "  " +PMCID);  */
 
  	$.ajax({
 		url: 'dashboardAjax',
@@ -98,6 +96,8 @@ function myFuncton(tableOrder,PMCID){
  	   		PMCID: PMCID
  	   	},
  	   	success: function(data) {
+ 	   		
+ 	   		/* alert("tableOrder: "+tableOrder); */
  	   		
  			$('#tab-2').html($(data).find("label:contains("+tableOrder+")").parent());
  		 
@@ -142,8 +142,6 @@ function myFuncton(tableOrder,PMCID){
 		<div class = "div18">
 			<br/><br/>		
 			<p class="font_7" >Query history:</p>
-
-			<div id = "historyTable">
 			<table id="queryTable" class = "tableBody">
     		<thead>
     			<tr>
@@ -155,39 +153,37 @@ function myFuncton(tableOrder,PMCID){
     		</thead>
     		<tbody>
     			<tr>
-    				<td><a class = "removeHistory"><img id = "deleteImg" alt="" src="resources/img/delete.png" /></a></td>
+    				<td><img id = "deleteImg" alt="" src="resources/img/delete.png" /></td>
         			<td>Stephen C. Cox</td>
             		<td>$300</td>
             		<td><button id ="runQuery">Run</button></td>
         		</tr>
         		<tr>
-        			<td><a class = "removeHistory"><img id = "deleteImg" alt="" src="resources/img/delete.png" /></a></td>
+        			<td><img id = "deleteImg" alt="" src="resources/img/delete.png" /></td>
         			<td>Josephin Tan</td>
             		<td>$150</td>
             		<td><button id="runQuery">Run</button></td>
         		</tr>
         		<tr>
-        			<td><a class = "removeHistory"><img id = "deleteImg" alt="" src="resources/img/delete.png" /></a></td>
+        			<td><img id = "deleteImg" alt="" src="resources/img/delete.png" /></td>
         			<td>Josephin Tan</td>
             		<td>$150</td>
             		<td><button id="runQuery">Run</button></td>
         		</tr>
         		<tr>
-        			<td><a class = "removeHistory"><img id = "deleteImg" alt="" src="resources/img/delete.png" /></a></td>
+        			<td><img id = "deleteImg" alt="" src="resources/img/delete.png" /></td>
         			<td>Josephin Tan</td>
             		<td>$150</td>
             		<td><button id="runQuery">Run</button></td>
         		</tr>
    			 </tbody>
-			</table>
-			</div>
-			
-			<table>
-				<tr>
-					<td width="640"></td>
-						<td><button class ="fileButton">Clear</button></td>
-						<td><a class ="fileButton" href="download.do">Update</a></td>
+   			 <tfoot>
+   			 	<tr>
+					<td width="660px"></td>
+					<td><button class ="fileButton">Import</button></td>
+					<td><a class ="fileButton" href="download.do">Save</a></td>
 				</tr>
+   			 </tfoot>
 			</table>
 			
 			<hr id ="indexHr"/>
@@ -215,33 +211,59 @@ function myFuncton(tableOrder,PMCID){
 			</table>
 	
 			
-            <table class = "consTable">
+            <table>
                 <thead>
-					<tr>
-						<th>
-							Field
-						</th>
-						<th>
-							Operations
-						</th>
-						<th>
-							Value
-						</th>
-						<th>
-							And/Or
-						</th>
-						<th>
-						</th>
-					</tr>
-                	
+                	<td>
+                	</td>
+                	<>
                 </thead>
                 <tbody id="queryItem">
-           	
+<!--                 	<tr>
+                		
+                		<td> -->
+                		<%-- 	
+                		<div class = "dropholder"  style="margin: 20px 0 0 60px;" >
+  						<p class = "dropP">Select&nbsp;&nbsp;</p>
+							<div class="dropdown">
+							
+							<form:select class="dropSelect" id="select" path="select" onchange="selectDropdown()">
+   									<form:option value="default">&nbsp;</form:option>
+   									<form:option value="Table">Table</form:option>
+   									<form:option value="Cell">Cell</form:option>
+   									<form:option value="Number">Number</form:option> 
+								</form:select> 
+							
+							</div> 
+
+						</div> 
+						 --%>
+<%-- 						 	<div id ="radioButtonDiv">
+								Select: &nbsp;&nbsp;
+								
+								<form:radiobutton class = "radioForm" name= "radioSelect" path="select" value="Table" />Table
+								<form:radiobutton class = "radioForm" name= "radioSelect" path="select" value="Cell" />Cell
+								<form:radiobutton class = "radioForm" name= "radioSelect" path="select" value="Number" />Number
+
+							</div>
+						
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+						</td>	
+						<td></td> 		
+                		
+                	</tr>
+                	 --%>
+                	
+                	
                     <c:forEach items="${queryItem.tableList}" var="QueryItemTable" varStatus="i" begin="0" >
                         <tr class="queryItemTable">    
                             <td>
                             
                             	 <!-- field drop-down menu -->
+								<div class = "dropholder" style="margin-left: 60px;" >
+  									<p class = "dropP">&nbsp;Field&nbsp;&nbsp;</p>
 										<div class="dropdown">
 
    										<form:select class="dropSelect" path="tableList[${i.index}].field" id="field${i.index}" >
@@ -257,25 +279,28 @@ function myFuncton(tableOrder,PMCID){
 										</form:select> 
 
 										</div>
+								</div>
 							
                             </td><!-- field dropdown menu end-->                        
                             
                             <td>
                             
                                 <!-- operations drop-down menu -->
-
+								<div class = "dropholder">
+  									<p class = "dropP">OPS&nbsp;&nbsp;&nbsp;&nbsp;</p>
 									<div class="dropdown">
-  							 
+  							
    									<form:select class="dropSelect" path="tableList[${i.index}].operations" id="operations${i.index}" >
 										<form:option value="default">&nbsp;</form:option>
    										<form:option value="Contains">Contains</form:option>
    										<form:option value="Greater">&gt;</form:option>
    										<form:option value="Smaller">&lt;</form:option>
-   										<%-- <form:option value="Range">Range</form:option> --%>
+   										<form:option value="Range">Range</form:option>
    										<form:option value="Type">Type</form:option>  	
 									</form:select>  
 							
 									</div>
+								</div>
                             
                             </td><!-- operations dropdown menu end-->
                             
@@ -288,8 +313,8 @@ function myFuncton(tableOrder,PMCID){
                       
                             <td>
                             	  <!-- And/Or drop-down menu -->
-<!-- 								<div class = "dropholder" class = "inline" style="margin-right: 10px;">
-  									<p class = "dropP">And/Or</p> -->
+								<div class = "dropholder" class = "inline" style="margin-right: 10px;">
+  									<p class = "dropP">And/Or</p>
 									<div class="dropdown">
 
    									<form:select class="dropSelect logicSelect"  path="tableList[${i.index}].logic" id="logic${i.index}"  used = "false">
@@ -299,7 +324,7 @@ function myFuncton(tableOrder,PMCID){
 									</form:select> 
  
 									</div>
-				<!-- 				</div>  -->
+								</div> 
                             </td>
                            
                             
@@ -345,32 +370,26 @@ function myFuncton(tableOrder,PMCID){
             
             
   			<!-- constraint cell -->
-  			<div style="display: none;" id = "cellConstraints" >
-  			<table>
-  				<tr>
-  					<td><p class = "font_9">Cell contraints:</p></td>
-  				</tr>
-  			</table>
   		
-	 		<table class = "consTable consTableCell"> 
+	 		<table style="display: none;" id = "cellConstraints" > 
 	 		<thead>
-	 			<tr>
-	 				<th>Field</th>
-	 				<th>Operations</th>
-	 				<th>Value</th>
-	 				<th>And/Or</th>
-	 				<th></th>
-	 			</tr>
             </thead>
             
             <tbody id="queryItemCellContainer">
-
+  			<tr>
+  			<td><p class = "font_9">Cell contraints:</p></td>
+  			<td></td>
+  			<td></td>
+  			<td></td>
+  			</tr>
+  			
   			<c:forEach items="${queryItem.cellList}" var="QueryItemCell" varStatus="i" begin="0" >                      
   			<tr id = "cellConstraintOption" class="queryItemCell">
    				<td>
    					<!-- field drop-down menu -->
-
-						<div class="dropdown dropdownCell">
+					<div class = "dropholder" style="margin-left: 60px;background-color: #ea808f;">
+  						<p class = "dropP">&nbsp;Field&nbsp;&nbsp;</p>
+						<div class="dropdown">
 						
    							<form:select class="dropSelect backgroundDropdown" path="cellList[${i.index}].field" id="field${i.index}">
    								<form:option value="default">&nbsp;</form:option>
@@ -385,24 +404,25 @@ function myFuncton(tableOrder,PMCID){
 							</form:select> 
 
 						</div>
-
+					</div>
    				</td>
     			<td>
     				<!-- operations drop-down menu -->
-
-						<div class="dropdown dropdownCell">
+					<div class = "dropholder" style="background-color: #ea808f;">
+  						<p class = "dropP">OPS&nbsp;&nbsp;&nbsp;&nbsp;</p>
+						<div class="dropdown">
   							
    							<form:select class="dropSelect backgroundDropdown" path="cellList[${i.index}].operations" id="operations${i.index}" >
 								<form:option value="default">&nbsp;</form:option>
    								<form:option value="Contains">Contains</form:option>
    								<form:option value="Greater">&gt;</form:option>
    								<form:option value="Smaller">&lt;</form:option>
-   								<%-- <form:option value="Range">Range</form:option> --%>
+   								<form:option value="Range">Range</form:option>
    								<form:option value="Type">Type</form:option>  	
 							</form:select>  
 							
 						</div>
-
+					</div>
     			</td> 
     			<td>
     				<!--input the value  -->
@@ -414,8 +434,9 @@ function myFuncton(tableOrder,PMCID){
     			</td>
     			<td>
     				<!-- And/Or drop-down menu -->
-
-						<div class="dropdown dropdownCell">
+					<div class = "dropholder" class = "inline" style="margin-right: 10px;background-color: #ea808f;">
+  						<p class = "dropP">And/Or</p>
+						<div class="dropdown">
 
    							<form:select class="dropSelect backgroundDropdown logicSelectCell"  path="cellList[${i.index}].logic" id="logic${i.index}" used ="false">
    								<form:option value="default">&nbsp;</form:option>
@@ -424,7 +445,7 @@ function myFuncton(tableOrder,PMCID){
 							</form:select> 
  
 						</div>
-
+					</div> 
     			</td>
     			
     			<td>
@@ -444,11 +465,10 @@ function myFuncton(tableOrder,PMCID){
   			
   			</tbody>
   			</table> <!-- constraint cell end -->
-            </div>
             
             <table>
   			<tr>
-  				<td width= "590">
+  				<td width= "510">
   				</td>
   				<td>
   					<a class="fileButton" style="background-color: #DBA425; " href="${pageContext.request.contextPath}/dashboardPage" class="button">Clear</a>
@@ -617,7 +637,7 @@ function myFuncton(tableOrder,PMCID){
 			
 			<c:if test="${errorInput}">
 			<script>
-  				alert("Sorry. You should accomplish and check your input.");        
+  				alert("Sorry. You should accomplish all input.");        
 			</script>
 			</c:if>
 			
