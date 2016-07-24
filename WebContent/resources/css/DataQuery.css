@@ -217,3 +217,19 @@ ul.tabs li{
 	overflow-y:scroll;
 	overflow-x: hidden;
 }
+
+.textResultTable tr:nth-child(even) {background-color:#F0EEF1;}
+.textResultTable th{background-color:#d8d8d8;}/* #ffc42f */
+.textResultTable td{padding-left:5px;}
+.textResultTable th{padding-left:5px;}
+.tableResult{
+	color:#693794;
+	text-decoration: underline;
+}
+.tableResultTd{
+	width: 100px;
+}
+
+.tableResultTd a:link {
+	color:#693794;
+}

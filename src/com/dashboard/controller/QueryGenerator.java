@@ -134,7 +134,7 @@ public class QueryGenerator {
 	 */
 	private String processTableConstriants(){
 		
-		if (queryItem.getTableList().size() == 0) return " clinicTable ";
+		if (queryItem.getTableList().size() == 0) return "";
 		
 		String tmpQuery = "SELECT * FROM clinicTable ";
 		
@@ -262,7 +262,10 @@ public class QueryGenerator {
 		
 		if (queryItem.getCellList().size() == 0 ) return tmpQuery;
 		
-		tmpQuery = " SELECT * FROM (" + tmpQuery + " ) AS T ";
+		
+		if(!tmpQuery.equals(""))
+			tmpQuery = " SELECT * FROM (" + tmpQuery + " ) AS T ";
+		else tmpQuery = " SELECT * FROM clinicTable ";
 		
 		for( int i = 0; i < queryItem.getCellList().size();++i){
 			
@@ -338,9 +341,14 @@ public class QueryGenerator {
 	}
 	
 	public void generator(){
+		String subQuery = "";
 		switch(queryItem.getSelect()){
-			case "Table": query += "SELECT distinct PMCID, TableOrder, TableCaption FROM (" 
-					+ processTableConstriants() + " ) AS T ";
+			case "Table": 
+				subQuery = processTableConstriants();
+				if (!subQuery.equals(""))
+				query += "SELECT distinct PMCID, TableOrder, TableCaption FROM (" 
+					+ subQuery + " ) AS T ";
+				else query += "SELECT distinct PMCID, TableOrder, TableCaption FROM clinicTable ";
 				
 				break;
 				

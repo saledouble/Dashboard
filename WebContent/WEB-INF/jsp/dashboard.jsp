@@ -37,6 +37,7 @@
 	$(document).ready(function() {
 
 		$('.radioSelect').click(function(){
+
 			if($(this).val() == "Table" || $(this).val() == "Number" ){
 				$("#cellConstraints").hide();		
 			}
@@ -45,7 +46,17 @@
 				$("#cellConstraints").show();
 			}
 		});
+		
 	})
+</script>
+
+<script>
+$(document).ready(function() {
+	//alert($('input[type="radio"]:checked').val());
+	if ($('input[type="radio"]:checked').val() == "Cell"){
+		$("#cellConstraints").show();
+	}
+})
 </script>
 
 
@@ -81,8 +92,8 @@ $(document).ready(function(){
 <script>
 /* Set the background of tables*/
 $(document).ready(function() {
-  $(".textResultTable tr:even").css("background-color", "#F0EEF1");
-  $(".textResultTable tr:odd").css("background-color", "#fff");
+/*   $(".textResultTable tr:even").css("background-color", "#F0EEF1");
+  $(".textResultTable tr:odd").css("background-color", "#fff"); */
 /*   $(".textResultTable a").css("color", "#642EFE");
   $(".textResultTable a:visited").css("color", "#B07784"); */
 })
@@ -542,7 +553,7 @@ function myFuncton(tableOrder,PMCID){
 						<tr>
 							<td><a href= "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC${table.pmcid}" target="_blank">${table.pmcid}</a></td>
                 			<td>${table.tableCaption}</td>
-                			<td width="70">
+                			<td class = "tableResultTd">
                 				<a onclick="myFuncton('${table.tableOrder}','${table.pmcid}');" class="tableResult">${table.tableOrder}</a>
                 			</td> 
 						</tr>
