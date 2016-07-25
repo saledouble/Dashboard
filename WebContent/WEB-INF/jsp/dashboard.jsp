@@ -90,16 +90,6 @@ $(document).ready(function(){
 </script>
 
 <script>
-/* Set the background of tables*/
-$(document).ready(function() {
-/*   $(".textResultTable tr:even").css("background-color", "#F0EEF1");
-  $(".textResultTable tr:odd").css("background-color", "#fff"); */
-/*   $(".textResultTable a").css("color", "#642EFE");
-  $(".textResultTable a:visited").css("color", "#B07784"); */
-})
-</script>
-
-<script>
 /**get the article of the selected table and capture the table**/
 function myFuncton(tableOrder,PMCID){
 
@@ -119,8 +109,34 @@ function myFuncton(tableOrder,PMCID){
 }
 </script>
 
+<script>
+
+function runHistory(select,query){
+	
+	/* alert(query); */
+	
+  	$.ajax({
+		url: 'dashboardHistoryAjax',
+		data: {
+ 	   		select: select,
+ 	   		query:query
+ 	   	},
+ 	   	success: function(data) {
+ 	   		
+ 	   		$('#history').html($(data));
+ 			alert("success");
+ 			
+ 	   },
+ 	   type: 'POST'
+ 	}); 
+
+}
+</script>
+
 </head>
 <body id="indexBackground">
+
+	<div id = "history">
 
 	<!-- header -->
 	<div class = "div2" style = "width: 980px;">
@@ -165,39 +181,29 @@ function myFuncton(tableOrder,PMCID){
         		</tr>
     		</thead>
     		<tbody>
-    			<tr>
-    				<td><a class = "removeHistory"><img id = "deleteImg" alt="" src="resources/img/delete.png" /></a></td>
-        			<td>Stephen C. Cox</td>
-            		<td>$300</td>
-            		<td><button id ="runQuery">Run</button></td>
-        		</tr>
-        		<tr>
-        			<td><a class = "removeHistory"><img id = "deleteImg" alt="" src="resources/img/delete.png" /></a></td>
-        			<td>Josephin Tan</td>
-            		<td>$150</td>
-            		<td><button id="runQuery">Run</button></td>
-        		</tr>
-        		<tr>
-        			<td><a class = "removeHistory"><img id = "deleteImg" alt="" src="resources/img/delete.png" /></a></td>
-        			<td>Josephin Tan</td>
-            		<td>$150</td>
-            		<td><button id="runQuery">Run</button></td>
-        		</tr>
-        		<tr>
-        			<td><a class = "removeHistory"><img id = "deleteImg" alt="" src="resources/img/delete.png" /></a></td>
-        			<td>Josephin Tan</td>
-            		<td>$150</td>
-            		<td><button id="runQuery">Run</button></td>
-        		</tr>
+    		
+    			<c:forEach var="history" items="${histroies}">
+    				<tr>
+    					<td><a class = "removeHistory"><img id = "deleteImg" alt="" src="resources/img/delete.png" /></a></td>
+        				<td>${history.select}</td>
+            			<td>${history.queryToUser}</td>
+            			<td>
+            				<button id ="runQuery" onclick="runHistory('${history.select}','${history.query}');">Run</button>
+            				<%-- ${history.query} --%>
+            			</td>
+        			</tr>
+        		
+        		</c:forEach>
+        		
    			 </tbody>
 			</table>
 			</div>
 			
-			<table>
+			<table id = "historyButton">
 				<tr>
-					<td width="640"></td>
-						<td><button class ="fileButton">Clear</button></td>
-						<td><a class ="fileButton" href="download.do">Update</a></td>
+					<td width="765"></td>
+						<td><a class ="fileButton" href="clear.do">Clear</a></td>
+						<!-- <td><a class ="fileButton">Update</a></td> -->
 				</tr>
 			</table>
 			
@@ -282,7 +288,6 @@ function myFuncton(tableOrder,PMCID){
    										<form:option value="Contains">Contains</form:option>
    										<form:option value="Greater">&gt;</form:option>
    										<form:option value="Smaller">&lt;</form:option>
-   										<%-- <form:option value="Range">Range</form:option> --%>
    										<form:option value="Type">Type</form:option>  	
 									</form:select>  
 							
@@ -462,11 +467,11 @@ function myFuncton(tableOrder,PMCID){
   				<td width= "590">
   				</td>
   				<td>
-  					<a class="fileButton" style="background-color: #DBA425; " href="${pageContext.request.contextPath}/dashboardPage" class="button">Clear</a>
+  					<a class="fileButton" style="background-color: #fdb221; " href="${pageContext.request.contextPath}/dashboardPage" class="button">Clear</a>
 				</td>
 				
   				<td>
-  					<input  class="fileButton" style="margin-left:20px;" type="submit" value="Submit& Run">
+  					<input  class="fileButton" style="margin-left:20px;" type="submit" value="Submit">
 				</td>
   				
   			</tr>
@@ -543,18 +548,18 @@ function myFuncton(tableOrder,PMCID){
 					<table class= "textResultTable">
 						<thead>
 							<tr>
-							<th>PMCID</th>
+							<th class = "tableResultTd0">PMCID</th>
 							<th>Table caption</th>
-							<th>Table order</th>
+							<th class = "tableResultTd">Table order</th>
 							</tr>
 						</thead>
 						<tbody>
 						<c:forEach var="table" items="${tables}">
 						<tr>
-							<td><a href= "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC${table.pmcid}" target="_blank">${table.pmcid}</a></td>
+							<td><a href= "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC${table.pmcid}" target="_blank" class="pmcidResult">${table.pmcid}</a></td>
                 			<td>${table.tableCaption}</td>
-                			<td class = "tableResultTd">
-                				<a onclick="myFuncton('${table.tableOrder}','${table.pmcid}');" class="tableResult">${table.tableOrder}</a>
+                			<td>
+                				<a class="tableResult" onclick="myFuncton('${table.tableOrder}','${table.pmcid}');">${table.tableOrder}</a>
                 			</td> 
 						</tr>
 						</c:forEach>
@@ -571,42 +576,42 @@ function myFuncton(tableOrder,PMCID){
 					<!-- cell result -->
 					<c:if test="${not empty cells}">					
 
-					<table class= "textResultTable">
+					<table id = "cellResultTable" class= "textResultTable">
 						<thead>
 							<tr>
-							<th>PMCID</th>
-							<th>Table order</th>
-							<th>Row No.</th>
-							<th>Column No.</th>
-							<th>Header</th>
-							<th>Stub</th>
-							<th>Super-row</th>
-							<th>Content</th>
+							<th class = "tableResultTd0">PMCID</th>
+							<th class = "tableResultTd">Table order</th>
+							<th class = "tableResultTd0">Row No.</th>
+							<th class = "tableResultTd">Column No.</th>
+							<th class = "tableResultTd1">Header</th>
+							<th class = "tableResultTd1">Stub</th>
+							<th class = "tableResultTd1">Super-row</th>
+							<th class = "tableResultTd2">Content</th>
 							</tr>
 						</thead>
 						<tbody>
 						<c:forEach var="cell" items="${cells}">
 						<tr>
-							<td><a href= "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC${cell.pmcid}" target="_blank">${cell.pmcid}</a></td>
-                			<td width="70">
+							<td><a href= "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC${cell.pmcid}" target="_blank" class="pmcidResult">${cell.pmcid}</a></td>
+                			<td class = "tableResultTd">
                 				<a onclick="myFuncton('${cell.tableOrder}','${cell.pmcid}');" class="tableResult">${cell.tableOrder}</a>
                 			</td> 
-                			<td width="70">
+                			<td>
                 				${cell.rowN}
                 			</td>
-                			<td width="70">
+                			<td>
                 				${cell.columnN}
                 			</td>
-                			<td width="200">
+                			<td>
                 				${cell.wholeHeader}
                 			</td>
-                			<td width="200">
+                			<td>
                 				${cell.wholeStub}
                 			</td>
-                			<td width="200">
+                			<td>
                 				${cell.wholeSuperRow}
                 			</td>
-                			<td width="300">
+                			<td>
                 				${cell.content}
                 			</td>
                 			
@@ -641,5 +646,8 @@ function myFuncton(tableOrder,PMCID){
 	
 		
 	</div> <!-- div17 end -->
+	
+	</div>
+	
 </body>
 </html>

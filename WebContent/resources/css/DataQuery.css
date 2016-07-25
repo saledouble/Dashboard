@@ -78,6 +78,7 @@ input[type="text"] {
 {
 	color: #8F62A7;
 	padding: 9px 8px 0px 8px;
+	border-bottom:thin solid #d8cef6;
 }
 #queryTable tbody tr:hover td
 {
@@ -85,12 +86,12 @@ input[type="text"] {
 }
 
 #deleteImg{
-	width: 10px;
-	height: 10px;
+	width: 15px;
+	height: 15px;
 }
 
 #runQuery{
-	background-color: #DBA425;
+	background-color: #fdb221;
 	color: #ffffff;
 	border-radius:5px;
 	border: none;
@@ -212,24 +213,37 @@ ul.tabs li{
 
 #historyTable{
 	margin-top: 20px;
-	height:157px;
+	height:350px;
 	width: 920px;
 	overflow-y:scroll;
 	overflow-x: hidden;
 }
 
 .textResultTable tr:nth-child(even) {background-color:#F0EEF1;}
-.textResultTable th{background-color:#d8d8d8;}/* #ffc42f */
-.textResultTable td{padding-left:5px;}
+.textResultTable th{background-color:#d8d8d8;}
+.textResultTable td{
+	padding-left:5px;    
+	overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    }
+    
 .textResultTable th{padding-left:5px;}
-.tableResult{
-	color:#693794;
-	text-decoration: underline;
-}
-.tableResultTd{
-	width: 100px;
+
+a.pmcidResult:link {color:#794ad0;}
+a.pmcidResult:visited{color:#d8cef6;}
+
+a.tableResult{color:#794ad0;text-decoration: underline;}
+
+.tableResultTd0{width: 75px;}
+.tableResultTd{width: 100px;}
+.tableResultTd1{width: 200px;}
+.tableResultTd2{width: 250px;}
+
+#cellResultTable{
+	width: 1200px;
 }
 
-.tableResultTd a:link {
-	color:#693794;
+#historyButton{
+	height: 70px;
 }

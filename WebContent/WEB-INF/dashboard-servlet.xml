@@ -39,5 +39,11 @@
       class="com.dashboard.dao.TextResultJDBCTemplate">
       <property name="dataSource"  ref="dataSource" />    
    </bean> 
+   
+    <!-- Definition for historyJDBCTemplate bean -->
+    <bean id="historyJDBCTemplate" 
+      class="com.dashboard.dao.HistoryJDBCTemplate">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean> 
  
 </beans>

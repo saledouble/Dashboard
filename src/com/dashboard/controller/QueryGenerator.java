@@ -285,6 +285,13 @@ public class QueryGenerator {
 		
 	}
 	
+	/**
+	 * generate the one simple query of cell constraints
+	 * @param field
+	 * @param where
+	 * @param queryItemCell
+	 * @return
+	 */
 	private String basicCellConstraints(String field, String where, QueryItemCell queryItemCell){
 		String cellConstraints ="";
 		switch(queryItemCell.getOperations()){
@@ -352,13 +359,22 @@ public class QueryGenerator {
 				
 				break;
 				
-			case "Cell": query += "SELECT distinct PMCID, TableOrder, RowN, ColumnN,"
+			case "Cell": 
+				subQuery = processCellConstriants();
+				if (!subQuery.equals(""))
+				query += "SELECT distinct PMCID, TableOrder, RowN, ColumnN,"
 				+ " WholeHeader, WholeStub, WholeSuperRow, Content FROM ( "+
-					processCellConstriants() + " ) AS T ";
+					subQuery + " ) AS T ";
+				else query += "SELECT distinct PMCID, TableOrder, RowN, ColumnN,"
+						+ " WholeHeader, WholeStub, WholeSuperRow, Content FROM  clinicTable ";
 				break;
 				
-			case "Number": query += "SELECT count(*)  FROM (" 
+			case "Number": 
+				subQuery = processTableConstriants();
+				if (!subQuery.equals(""))
+				query += "SELECT count(*)  FROM (" 
 					+ processTableConstriants() + " ) AS T "; 
+				else query += "SELECT count(*)  FROM  clinicTable ";
 				
 				break;
 			default: System.out.println("Error input"); break;

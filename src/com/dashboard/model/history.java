@@ -1,6 +1,6 @@
 package com.dashboard.model;
 
-public class history {
+public class History {
 	private String query;
 	private String queryToUser;
 	private String select;

@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dashboard.dao.HistoryJDBCTemplate;
 import com.dashboard.dao.TableJDBCTemplate;
 import com.dashboard.dao.TextResultJDBCTemplate;
 import com.dashboard.model.CellModel;
+import com.dashboard.model.History;
 import com.dashboard.model.QueryItem;
 import com.dashboard.model.QueryItemCell;
 import com.dashboard.model.QueryItemTable;
@@ -37,6 +39,12 @@ public class DropdownMenuController {
 	TableJDBCTemplate tableJDBCTemplate;
 	@Autowired
 	TextResultJDBCTemplate textResultJDBCTemplate;
+	@Autowired
+	HistoryJDBCTemplate historyJDBCTemplate;
+	
+	List<History> histories;
+	
+	QueryItem queryItem;
 	
 	
 	@RequestMapping(value="/dashboardPage",method=RequestMethod.GET)  
@@ -45,6 +53,14 @@ public class DropdownMenuController {
 		ModelAndView mav = new ModelAndView("dashboard");
 		
 		mav.addObject("queryItem", getDummyQueryItem());
+		
+		histories = historyJDBCTemplate.getItems();
+
+		for(int i = 0; i < histories.size();++i){
+			histories.get(i).setQuery(histories.get(i).getQuery().replace("\"", "\\\'"));
+		}
+
+		mav.addObject("histroies",histories);
 
 		return mav; 
 	}
@@ -63,9 +79,10 @@ public class DropdownMenuController {
 		
 		QueryGenerator queryGenerator = new QueryGenerator(queryItem);
 
-		///// test print
-//		System.out.println("query: "+ queryGenerator.getQuery());
 		
+		/**
+		 * query and return the result to jsp page
+		 */
 		if (!queryGenerator.getCorrectInput()){
 			mav.addObject("errorInput", true);
 			
@@ -85,38 +102,44 @@ public class DropdownMenuController {
 				case "Number":
 					
 					int number = tableJDBCTemplate.getCount(queryGenerator.getQuery());
-
-//					System.out.println("number: "+ number);
-					
-					mav.addObject("number", number);
-					break;
-				
 			
+					mav.addObject("number", number);
+					break;	
 			}
 			
 		}
-				
-		////test print
-		System.out.println();
-		System.out.println("select:" + queryItem.getSelect() +"\n");
-		for(int i= 0 ;i < queryItem.getTableList().size(); ++i){
-		System.out.println( "field: " +queryItem.getTableList().get(i).getField()+"\n"
-			+ "operations: " + queryItem.getTableList().get(i).getOperations()+"\n"
-			+ "constraints: " + queryItem.getTableList().get(i).getConstraintValue()+"\n"
-			+ "logic: " + queryItem.getTableList().get(i).getLogic());
-		}
 		
-		for(int i= 0 ;i < queryItem.getCellList().size(); ++i){
-		System.out.println( "Cell field: " +queryItem.getCellList().get(i).getField()+"\n"
-			+ "Cell operations: " + queryItem.getCellList().get(i).getOperations()+"\n"
-			+ "Cell constraints: " + queryItem.getCellList().get(i).getConstraintValue()+"\n"
-			+ "Cell logic: " + queryItem.getCellList().get(i).getLogic());
-		}
-
+		/**
+		 * show all histories in the view
+		 */
+		HistoryProcessor historyProcessor = new HistoryProcessor(queryItem,queryGenerator.getQuery());
+		
+		histories = historyProcess(historyProcessor);
+		
+		mav.getModel().put("histroies",histories);
 		
 		return mav; 
 		
 	}
+	
+	/**
+	 * get all histories from database
+	 * and make the query can be passed through ajax
+	 * @param historyProcessor
+	 * @return
+	 */
+	private List<History> historyProcess(HistoryProcessor historyProcessor){
+		String insertQuery = historyProcessor.generateInsertQuery();
+		historyJDBCTemplate.insertRecord(insertQuery);
+		List<History> histories = historyJDBCTemplate.getItems();
+		
+		for(int i = 0; i < histories.size();++i){
+			histories.get(i).setQuery(histories.get(i).getQuery().replace("\"", "\\\'"));
+		}
+		
+		return histories;
+	}
+	
 	
 	
 	/**
@@ -137,6 +160,52 @@ public class DropdownMenuController {
 	 }
 	
 	/**
+	 * execute the query in the record of history and 
+	 * return the query result to the view
+	 * @param select
+	 * @param query
+	 * @return
+	 */
+	@RequestMapping(value="/dashboardHistoryAjax",method=RequestMethod.POST)
+	public ModelAndView histroryQuery(@RequestParam(value = "select") String select,
+								@RequestParam(value = "query") String query) {
+		
+		System.out.println("history: "+select);
+		System.out.println("query: "+query);
+		
+		ModelAndView mav = new ModelAndView("dashboard"); 
+		
+		mav.addObject("queryItem", getDummyQueryItem());
+		
+		switch(select){
+		case "Table":  
+			List<TableModel> tables = tableJDBCTemplate.getItems(query);
+			mav.addObject("tables", tables);
+			
+			/////test
+			System.out.println("historyTable: "+tables.get(0).getPmcid());
+			
+			break;
+		
+		case "Cell":
+			List<CellModel> cells = tableJDBCTemplate.getCellItems(query);
+			mav.addObject("cells", cells);
+			break;
+		
+		case "Number":
+			
+			int number = tableJDBCTemplate.getCount(query);
+	
+			mav.addObject("number", number);
+			break;	
+		}
+		mav.getModel().put("histroies",histories);
+		return mav;
+//		return "redirect:/dashboardPage";
+	 }
+	
+	
+	/**
 	 * initialize the queryItem
 	 * @return
 	 */
@@ -151,17 +220,19 @@ public class DropdownMenuController {
         return new QueryItem (tableList,cellList);
     }
     
-//    @RequestMapping("/download.do")
-//    private ModelAndView saveTofile(@ModelAttribute QueryItem queryItem){
-//    	
-//    	System.out.println("download "+ queryItem.getSelect());
-//    	
-//    	ModelAndView mav = new ModelAndView("queryDepository");
-//    	mav.addObject("queryItem",queryItem);
-//    	
-//    	return mav;
-//    }
-//	
+    /**
+     * clear all history
+     * @return
+     */
+    @RequestMapping("/clear.do")
+    private String saveTofile(){
+ 
+    	historyJDBCTemplate.clear();
+    	
+    	return "redirect:/dashboardPage";
+
+    }
+	
     
     
 }
