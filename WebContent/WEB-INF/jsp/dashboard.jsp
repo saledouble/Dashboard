@@ -18,9 +18,6 @@
 <title>Web-based Dashboard</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	 
-
-</script>
 
 <script>
 	$(document).ready(function() {
@@ -69,8 +66,7 @@ $(document).ready(function(){
 	});
 	
 	
-	/* remove a history in the table*/
-	
+	/* remove a history in the table*/	
 	  $(".removeHistory").click(function(){
 	      $(this).closest('tr').remove();
 	    });

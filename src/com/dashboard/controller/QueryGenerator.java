@@ -134,41 +134,37 @@ public class QueryGenerator {
 	 */
 	private String processTableConstriants(){
 		
-		if (queryItem.getTableList().size() == 0) return "";
+		if (queryItem.getTableList().size() == 0) return "SELECT PMCID, TableCaption, TableOrder FROM clinicTable ";
 		
-		String tmpQuery = "SELECT * FROM clinicTable ";
-		
-		tmpQuery += basicTableConstraints(
-				basicTableConstraintsField(queryItem.getTableList().get(0)), 
-				queryItem.getTableList().get(0));
-		
-		//System.out.println("table contraints: "+ tmpQuery);
-		
+		String tmpQuery = "";
 		
 		// if the logic is And:
 		// the nested query will be generated
 		// if the logic is or
 		// just union the queries
-		for(int i = 0; i < queryItem.getTableList().size() - 1;++i){
+		for(int i = 0; i < queryItem.getTableList().size();++i){
+			tmpQuery += "SELECT PMCID, TableCaption, TableOrder FROM clinicTable ";
+			
+			tmpQuery += basicTableConstraints(
+					basicTableConstraintsField(queryItem.getTableList().get(i)), 
+					queryItem.getTableList().get(i));
 			
 			switch(queryItem.getTableList().get(i).getLogic()){
 				case "And":
-					tmpQuery += basicTableConstraints(
-							basicTableConstraintsField(queryItem.getTableList().get(i+1)), 
-							queryItem.getTableList().get(i+1));
+				
+					tmpQuery += " INTERSECT ";
 					
 					break;
 				case "Or": 
-					tmpQuery = tmpQuery + " UNION SELECT * FROM clinicTable " +basicTableConstraints(
-							basicTableConstraintsField(queryItem.getTableList().get(i+1)), 
-							queryItem.getTableList().get(i+1));
+					// UNION is inferior in precedence to INTERSECT 
+					tmpQuery += " UNION ";					
 					
 					break;			
 			}
 			
 		}
 	
-		System.out.println(tmpQuery);
+//		System.out.println(tmpQuery);
 		return tmpQuery;
 	}
 	
@@ -260,12 +256,15 @@ public class QueryGenerator {
 		String loop = "WHERE ";
 		String tmpQuery = processTableConstriants();
 		
+		tmpQuery = "SELECT distinct PMCID, TableOrder, RowN, ColumnN, WholeHeader, WholeStub, WholeSuperRow, Content  " +
+					" FROM ( " +
+						"SELECT * FROM ( " + tmpQuery ;
+		tmpQuery +=  
+										") AS T " +
+						" NATURAL LEFT JOIN clinicTable " +
+						") as T1 ";		
+		
 		if (queryItem.getCellList().size() == 0 ) return tmpQuery;
-		
-		
-		if(!tmpQuery.equals(""))
-			tmpQuery = " SELECT * FROM (" + tmpQuery + " ) AS T ";
-		else tmpQuery = " SELECT * FROM clinicTable ";
 		
 		for( int i = 0; i < queryItem.getCellList().size();++i){
 			
@@ -276,8 +275,8 @@ public class QueryGenerator {
 			
 			
 			switch(queryItem.getCellList().get(i).getLogic()){
-				case "And": query += "AND ";break;
-				case "Or": query += "OR ";break;
+				case "And": tmpQuery += "AND ";break;
+				case "Or": tmpQuery += "OR ";break;
 					
 			}
 		}
@@ -348,33 +347,23 @@ public class QueryGenerator {
 	}
 	
 	public void generator(){
-		String subQuery = "";
+
 		switch(queryItem.getSelect()){
 			case "Table": 
-				subQuery = processTableConstriants();
-				if (!subQuery.equals(""))
-				query += "SELECT distinct PMCID, TableOrder, TableCaption FROM (" 
-					+ subQuery + " ) AS T ";
-				else query += "SELECT distinct PMCID, TableOrder, TableCaption FROM clinicTable ";
-				
+				query = processTableConstriants();
+		
 				break;
 				
 			case "Cell": 
-				subQuery = processCellConstriants();
-				if (!subQuery.equals(""))
-				query += "SELECT distinct PMCID, TableOrder, RowN, ColumnN,"
-				+ " WholeHeader, WholeStub, WholeSuperRow, Content FROM ( "+
-					subQuery + " ) AS T ";
-				else query += "SELECT distinct PMCID, TableOrder, RowN, ColumnN,"
-						+ " WholeHeader, WholeStub, WholeSuperRow, Content FROM  clinicTable ";
+				query = processCellConstriants();
+
 				break;
 				
 			case "Number": 
-				subQuery = processTableConstriants();
-				if (!subQuery.equals(""))
-				query += "SELECT count(*)  FROM (" 
-					+ processTableConstriants() + " ) AS T "; 
-				else query += "SELECT count(*)  FROM  clinicTable ";
+
+				query += "SELECT count(*)  FROM ( " +
+						processTableConstriants()+
+						") AS T";
 				
 				break;
 			default: System.out.println("Error input"); break;

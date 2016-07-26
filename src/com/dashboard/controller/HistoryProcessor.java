@@ -59,7 +59,8 @@ public class HistoryProcessor {
 					" "+
 					queryItem.getCellList().get(i).getConstraintValue() +
 					" "+
-					queryItem.getCellList().get(i).getLogic();
+					queryItem.getCellList().get(i).getLogic()
+					+ "<br/>";
 					
 		}
 	}
@@ -80,7 +81,8 @@ public class HistoryProcessor {
 					" "+
 					queryItem.getTableList().get(i).getConstraintValue()+
 					" "
-					+queryItem.getTableList().get(i).getLogic();				
+					+queryItem.getTableList().get(i).getLogic()
+					+"<br/>";				
 		}
 	}
 	

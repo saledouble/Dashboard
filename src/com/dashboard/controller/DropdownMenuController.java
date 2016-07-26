@@ -107,16 +107,16 @@ public class DropdownMenuController {
 					break;	
 			}
 			
+			/**
+			 * show all histories in the view
+			 */
+			HistoryProcessor historyProcessor = new HistoryProcessor(queryItem,queryGenerator.getQuery());
+			
+			histories = historyProcess(historyProcessor);
+			
+			mav.getModel().put("histroies",histories);
+			
 		}
-		
-		/**
-		 * show all histories in the view
-		 */
-		HistoryProcessor historyProcessor = new HistoryProcessor(queryItem,queryGenerator.getQuery());
-		
-		histories = historyProcess(historyProcessor);
-		
-		mav.getModel().put("histroies",histories);
 		
 		return mav; 
 		
