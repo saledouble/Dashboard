@@ -45,4 +45,14 @@ public class HistoryJDBCTemplate
 		   jdbcTemplateObject.execute("Truncate History;");
 	   }
 	   
+	   /**
+	    * delete one selected history
+	    * @param query
+	    */
+	   public void deleteRecord(String query){
+		   
+		   String deleteQuery = "DELETE FROM History WHERE queryString = \'"+query+"\'";
+		   jdbcTemplateObject.execute(deleteQuery);
+	   }
+	   
 }

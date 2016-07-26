@@ -18,17 +18,6 @@
 <title>Web-based Dashboard</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>
-/* function selectDropdown() {
-    loc = document.getElementById('select');
-    
-    if (loc.value == 'Table' || loc.value == 'Number') {
-    	$("#cellConstraints").hide();
-    }
-    if (loc.value == 'Cell') {
-    	$("#cellConstraints").show();
-    }
-} */
 	 
 
 </script>
@@ -52,7 +41,7 @@
 
 <script>
 $(document).ready(function() {
-	//alert($('input[type="radio"]:checked').val());
+
 	if ($('input[type="radio"]:checked').val() == "Cell"){
 		$("#cellConstraints").show();
 	}
@@ -110,7 +99,10 @@ function myFuncton(tableOrder,PMCID){
 </script>
 
 <script>
-
+/* pass the query and select to controller,
+ * query in the controller and
+ * show the result in the div with id history
+ */
 function runHistory(select,query){
 	
 	/* alert(query); */
@@ -123,9 +115,53 @@ function runHistory(select,query){
  	   	},
  	   	success: function(data) {
  	   		
- 	   		$('#history').html($(data));
- 			alert("success");
+ 	   		$('#queryResult').html($(data));
+ 			alert("Run success!");
  			
+ 	   },
+ 	   type: 'POST'
+ 	}); 
+
+}
+</script>
+
+<script>
+/* pass one selected history to controller
+ * and controller will delete the row by DAO
+ */
+function deleteHistory(query){
+	
+	/* alert(query); */
+	
+  	$.ajax({
+		url: 'dashboardDeleteHistoryAjax',
+		data: {
+ 	   		query:query
+ 	   	},
+ 	   	success: function(data) {
+ 	   	
+ 			alert("Delete success!");	
+ 	   },
+ 	   type: 'POST'
+ 	}); 
+
+}
+</script>
+
+<script>
+/* clear all history
+ */
+function clearHistory(query){
+	/* alert("enter success!"); */
+	
+  	$.ajax({
+		url: 'clearHistory',
+		data: {
+ 	   		query:query
+ 	   	},
+ 	   	success: function() {
+ 	   		alert("Clear success!");
+ 	   		$('#historyTableBody').empty();	
  	   },
  	   type: 'POST'
  	}); 
@@ -135,8 +171,6 @@ function runHistory(select,query){
 
 </head>
 <body id="indexBackground">
-
-	<div id = "history">
 
 	<!-- header -->
 	<div class = "div2" style = "width: 980px;">
@@ -176,20 +210,22 @@ function runHistory(select,query){
     			<tr>
     				<th width = "50px"></th>
         			<th width = "150px">select</th>
-            		<th>Constraints</th>
+            		<th>Table Constraints</th>
+            		<th>Cell Constraints</th>
             		<th width = "100px">Query</th>
         		</tr>
     		</thead>
-    		<tbody>
+    		<tbody id = "historyTableBody">
     		
     			<c:forEach var="history" items="${histroies}">
     				<tr>
-    					<td><a class = "removeHistory"><img id = "deleteImg" alt="" src="resources/img/delete.png" /></a></td>
+    					<td><a class = "removeHistory" onclick="deleteHistory('${history.query}');"><img id = "deleteImg" alt="" src="resources/img/delete.png" /></a></td>
         				<td>${history.select}</td>
             			<td>${history.queryToUser}</td>
+            			<td>${history.queryToUserCell}</td>
+            			
             			<td>
             				<button id ="runQuery" onclick="runHistory('${history.select}','${history.query}');">Run</button>
-            				<%-- ${history.query} --%>
             			</td>
         			</tr>
         		
@@ -202,8 +238,9 @@ function runHistory(select,query){
 			<table id = "historyButton">
 				<tr>
 					<td width="765"></td>
-						<td><a class ="fileButton" href="clear.do">Clear</a></td>
-						<!-- <td><a class ="fileButton">Update</a></td> -->
+					
+						<td><button class ="fileButton" onclick="clearHistory();">Clear</button></td>
+						
 				</tr>
 			</table>
 			
@@ -531,7 +568,7 @@ function runHistory(select,query){
             
         </script>		
 						
-			<div> <!-- query result -->
+			<div id ="queryResult"> <!-- query result -->
 			
 			<div class="container">
 
@@ -549,7 +586,7 @@ function runHistory(select,query){
 						<thead>
 							<tr>
 							<th class = "tableResultTd0">PMCID</th>
-							<th>Table caption</th>
+							<th class = "tableResultTd3">Table caption</th>
 							<th class = "tableResultTd">Table order</th>
 							</tr>
 						</thead>
@@ -631,6 +668,7 @@ function runHistory(select,query){
 					
 			</div> <!-- query result end -->
 			
+			
 			<c:if test="${errorInput}">
 			<script>
   				alert("Sorry. You should accomplish and check your input.");        
@@ -646,8 +684,6 @@ function runHistory(select,query){
 	
 		
 	</div> <!-- div17 end -->
-	
-	</div>
 	
 </body>
 </html>

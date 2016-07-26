@@ -1,9 +1,23 @@
 package com.dashboard.model;
 
+/**
+ * This class stores the history data model
+ * @author Grace Tang
+ *
+ */
 public class History {
 	private String query;
 	private String queryToUser;
+	private String queryToUserCell;
 	private String select;
+	
+	public void setQueryToUserCell(String queryToUserCell){
+		this.queryToUserCell = queryToUserCell;
+	}
+	
+	public String getQueryToUserCell(){
+		return this.queryToUserCell;
+	}
 	
 	public void setQuery(String query){
 		this.query = query;

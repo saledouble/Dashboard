@@ -213,7 +213,7 @@ ul.tabs li{
 
 #historyTable{
 	margin-top: 20px;
-	height:350px;
+	height:250px;
 	width: 920px;
 	overflow-y:scroll;
 	overflow-x: hidden;
@@ -239,6 +239,7 @@ a.tableResult{color:#794ad0;text-decoration: underline;}
 .tableResultTd{width: 100px;}
 .tableResultTd1{width: 200px;}
 .tableResultTd2{width: 250px;}
+.tableResultTd3{width: 700px;}
 
 #cellResultTable{
 	width: 1200px;

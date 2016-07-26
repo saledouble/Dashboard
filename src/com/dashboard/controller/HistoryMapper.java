@@ -17,7 +17,9 @@ public class HistoryMapper implements RowMapper<History> {
 		      History table = new History();
 		      table.setQuery(rs.getString("queryString"));
 		      table.setQueryToUser(rs.getString("queryForUser"));
+		      table.setQueryToUserCell(rs.getString("queryForUserCell"));
 		      table.setSelect(rs.getString("selectOption"));
+		      
 		      return table;
 		   }
 		}

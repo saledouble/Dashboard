@@ -151,13 +151,34 @@ public class DropdownMenuController {
 	@ResponseBody
 	public String textResultProcess(@RequestParam(value = "PMCID") String pmcid) {
 		
-		System.out.println(pmcid);
-		
 		TextResultModel textResult = textResultJDBCTemplate.getItem(pmcid);
 
 		return textResult.getTextNode();
 
 	 }
+	
+	
+	/**
+	 * delete the selected record in the history table
+	 * @param query
+	 */
+	@RequestMapping(value="/dashboardDeleteHistoryAjax",method = RequestMethod.POST)
+	@ResponseBody
+	public void historyDelete(@RequestParam(value = "query") String query) {
+		
+		historyJDBCTemplate.deleteRecord(convertQuot(query));
+
+	 }
+	
+	/**
+	 * convert ' to "
+	 * @param query
+	 * @return
+	 */
+	private String convertQuot(String query){
+		return query.replace("\'", "\"");
+	}
+	
 	
 	/**
 	 * execute the query in the record of history and 
@@ -170,20 +191,17 @@ public class DropdownMenuController {
 	public ModelAndView histroryQuery(@RequestParam(value = "select") String select,
 								@RequestParam(value = "query") String query) {
 		
-		System.out.println("history: "+select);
-		System.out.println("query: "+query);
-		
-		ModelAndView mav = new ModelAndView("dashboard"); 
-		
-		mav.addObject("queryItem", getDummyQueryItem());
-		
+
+		ModelAndView mav = new ModelAndView("history"); 
+	
 		switch(select){
 		case "Table":  
 			List<TableModel> tables = tableJDBCTemplate.getItems(query);
 			mav.addObject("tables", tables);
 			
-			/////test
-			System.out.println("historyTable: "+tables.get(0).getPmcid());
+			
+			///test
+			System.out.println("pmcid "+tables.get(0).getPmcid());
 			
 			break;
 		
@@ -199,9 +217,8 @@ public class DropdownMenuController {
 			mav.addObject("number", number);
 			break;	
 		}
-		mav.getModel().put("histroies",histories);
+		mav.addObject("histroies",histories);
 		return mav;
-//		return "redirect:/dashboardPage";
 	 }
 	
 	
@@ -224,12 +241,13 @@ public class DropdownMenuController {
      * clear all history
      * @return
      */
-    @RequestMapping("/clear.do")
-    private String saveTofile(){
+    @RequestMapping(value="/clearHistory",method=RequestMethod.POST)
+    @ResponseBody
+    private String clearHistory(){
  
     	historyJDBCTemplate.clear();
     	
-    	return "redirect:/dashboardPage";
+    	return "success";
 
     }
 	
