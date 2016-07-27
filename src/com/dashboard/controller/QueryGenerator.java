@@ -230,10 +230,7 @@ public class QueryGenerator {
 			case "Footer": 
 				tableConstraints = "TableFooter";
 			break;
-		
-			//////这两处以后再做处理
-			case "Row": tableConstraints = "Content"; break;
-			case "Column": tableConstraints = "Content"; break;
+
 		}
 		
 		return tableConstraints;

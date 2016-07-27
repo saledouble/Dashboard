@@ -204,7 +204,8 @@ ul.tabs li{
 }
 
 #radioButtonDiv{
-	margin:40px 0 10px 65px;
+	margin:0 0 10px 65px;
+	padding-top: 30px;
 	font-size: 17px; 
 	color:#7C34A3; 
 	text-align: left;

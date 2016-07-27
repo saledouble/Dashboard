@@ -7,11 +7,6 @@ package com.dashboard.model;
  */
 public class QueryItemTable {
 	
-//	/**
-//	 * select table, cell or number?
-//	 */
-//	private String select;
-	
 	/**
 	 * table constraints
 	 */

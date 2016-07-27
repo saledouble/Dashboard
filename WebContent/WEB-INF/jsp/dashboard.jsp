@@ -197,51 +197,7 @@ function clearHistory(query){
 	
  		<!-- body content -->
 		<div class = "div18">
-			<br/><br/>		
-			<p class="font_7" >Query history:</p>
 
-			<div id = "historyTable">
-			<table id="queryTable" class = "tableBody">
-    		<thead>
-    			<tr>
-    				<th width = "50px"></th>
-        			<th width = "150px">select</th>
-            		<th>Table Constraints</th>
-            		<th>Cell Constraints</th>
-            		<th width = "100px">Query</th>
-        		</tr>
-    		</thead>
-    		<tbody id = "historyTableBody">
-    		
-    			<c:forEach var="history" items="${histroies}">
-    				<tr>
-    					<td><a class = "removeHistory" onclick="deleteHistory('${history.query}');"><img id = "deleteImg" alt="" src="resources/img/delete.png" /></a></td>
-        				<td>${history.select}</td>
-            			<td>${history.queryToUser}</td>
-            			<td>${history.queryToUserCell}</td>
-            			
-            			<td>
-            				<button id ="runQuery" onclick="runHistory('${history.select}','${history.query}');">Run</button>
-            			</td>
-        			</tr>
-        		
-        		</c:forEach>
-        		
-   			 </tbody>
-			</table>
-			</div>
-			
-			<table id = "historyButton">
-				<tr>
-					<td width="765"></td>
-					
-						<td><button class ="fileButton" onclick="clearHistory();">Clear</button></td>
-						
-				</tr>
-			</table>
-			
-			<hr id ="indexHr"/>
-		
 		
 		<form:form modelAttribute="queryItem" method="post" id="queryItemForm">
 		
@@ -251,7 +207,7 @@ function clearHistory(query){
 				Select:&nbsp;&nbsp;
 				<form:radiobutton class= "radioSelect" path="select" value="Table" />Table&nbsp;
 				<form:radiobutton class= "radioSelect" path="select" value="Cell" />Cell&nbsp;
-				<form:radiobutton class= "radioSelect" path="select" value="Number" />Number&nbsp;
+				<form:radiobutton class= "radioSelect" path="select" value="Number" />Count&nbsp;
 			</div>
 
 			<table>
@@ -302,8 +258,8 @@ function clearHistory(query){
    											<form:option value="Super-row">Super-row</form:option>
    											<form:option value="Header">Header</form:option>
    											<form:option value="Footer">Footer</form:option>
-   											<form:option value="Row">Row</form:option>
-   											<form:option value="Column">Column</form:option>
+<%--    											<form:option value="Row">Row</form:option>
+   											<form:option value="Column">Column</form:option> --%>
 										</form:select> 
 
 										</div>
@@ -670,6 +626,52 @@ function clearHistory(query){
   				alert("Sorry. You should accomplish and check your input.");        
 			</script>
 			</c:if>
+			
+		<!-- 	<hr id ="indexHr"/> -->
+				
+			<p class="font_7" >Query history:</p>
+
+			<div id = "historyTable">
+			<table id="queryTable" class = "tableBody">
+    		<thead>
+    			<tr>
+    				<th width = "50px"></th>
+        			<th width = "150px">select</th>
+            		<th>Table Constraints</th>
+            		<th>Cell Constraints</th>
+            		<th width = "100px">Query</th>
+        		</tr>
+    		</thead>
+    		<tbody id = "historyTableBody">
+    		
+    			<c:forEach var="history" items="${histroies}">
+    				<tr>
+    					<td><a class = "removeHistory" onclick="deleteHistory('${history.query}');"><img id = "deleteImg" alt="" src="resources/img/delete.png" /></a></td>
+        				<td>${history.select}</td>
+            			<td>${history.queryToUser}</td>
+            			<td>${history.queryToUserCell}</td>
+            			
+            			<td>
+            				<button id ="runQuery" onclick="runHistory('${history.select}','${history.query}');">Run</button>
+            			</td>
+        			</tr>
+        		
+        		</c:forEach>
+        		
+   			 </tbody>
+			</table>
+			</div>
+			
+			<table id = "historyButton">
+				<tr>
+					<td width="765"></td>
+					
+						<td><button class ="fileButton" onclick="clearHistory();">Clear</button></td>
+						
+				</tr>
+			</table>
+		
+			
 			
 		</div> <!-- body content end -->
 		
