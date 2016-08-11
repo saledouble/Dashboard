@@ -99,12 +99,17 @@ public class DropdownMenuController {
 					mav.addObject("cells", cells);
 					break;
 				
-				case "Number":
+				case "CountTable":
 					
 					int number = tableJDBCTemplate.getCount(queryGenerator.getQuery());
 			
 					mav.addObject("number", number);
 					break;	
+				case "CountCell":
+					number = tableJDBCTemplate.getCount(queryGenerator.getQuery());
+					
+					mav.addObject("number", number);
+					break;
 			}
 			
 			/**
@@ -151,6 +156,7 @@ public class DropdownMenuController {
 	@ResponseBody
 	public String textResultProcess(@RequestParam(value = "PMCID") String pmcid) {
 		
+		
 		TextResultModel textResult = textResultJDBCTemplate.getItem(pmcid);
 
 		return textResult.getTextNode();
@@ -194,14 +200,12 @@ public class DropdownMenuController {
 
 		ModelAndView mav = new ModelAndView("history"); 
 	
+		System.out.println("test select: " +select);
+		
 		switch(select){
 		case "Table":  
 			List<TableModel> tables = tableJDBCTemplate.getItems(query);
 			mav.addObject("tables", tables);
-			
-			
-			///test
-			System.out.println("pmcid "+tables.get(0).getPmcid());
 			
 			break;
 		
@@ -210,12 +214,20 @@ public class DropdownMenuController {
 			mav.addObject("cells", cells);
 			break;
 		
-		case "Number":
+		case "CountTable":
+			///test print
+			System.out.println("countTable...");
 			
 			int number = tableJDBCTemplate.getCount(query);
 	
 			mav.addObject("number", number);
 			break;	
+		case "CountCell":
+			number = tableJDBCTemplate.getCount(query);
+			
+			mav.addObject("number", number);
+			
+			break;
 		}
 		mav.addObject("histroies",histories);
 		return mav;

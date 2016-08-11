@@ -15,7 +15,6 @@ public class QueryGenerator {
 	
 	private String query ="";
 	private boolean correctInput = true;
-//	private String constraints ="";
 	
 	public QueryGenerator(QueryItem queryItem) {
 		this.queryItem = queryItem;
@@ -36,16 +35,16 @@ public class QueryGenerator {
 	 */
 	public boolean inputIsCorrect(){
 		
-		/// those 3 if statements are used to check whether the users accomplish the input
+		/// those 3 statements are used to check whether the users accomplish the input
 
 		if(queryItem.getSelect().equals("default")) return false;
 		
-		// check whether the input is corect of table constraints
-		if (queryItem.getSelect().equals("Table") || queryItem.getSelect().equals("Number")){
+		// check whether the input of table constraints is correct
+		if (queryItem.getSelect().equals("Table") || queryItem.getSelect().equals("CountTable")){
 			return inputTableIsCorrect();
 		}
 		
-		if(queryItem.getSelect().equals("Cell")){
+		if(queryItem.getSelect().equals("Cell") || queryItem.getSelect().equals("CountCell")){
 			if( !inputTableIsCorrect()) return false;
 			return inputCellIsCorrect();
 		}	
@@ -137,29 +136,42 @@ public class QueryGenerator {
 		if (queryItem.getTableList().size() == 0) return "SELECT PMCID, TableCaption, TableOrder FROM clinicTable ";
 		
 		String tmpQuery = "";
+		Boolean isAND = false;
 		
 		// if the logic is And:
 		// the nested query will be generated
 		// if the logic is or
 		// just union the queries
 		for(int i = 0; i < queryItem.getTableList().size();++i){
-			tmpQuery += "SELECT PMCID, TableCaption, TableOrder FROM clinicTable ";
+			
+			if (!isAND)
+			tmpQuery += "SELECT distinct PMCID, TableCaption, TableOrder FROM clinicTable ";
 			
 			tmpQuery += basicTableConstraints(
 					basicTableConstraintsField(queryItem.getTableList().get(i)), 
 					queryItem.getTableList().get(i));
+
+			if(isAND) tmpQuery += " ) AS T" + i + " ";
 			
 			switch(queryItem.getTableList().get(i).getLogic()){
 				case "And":
-				
-					tmpQuery += " INTERSECT ";
 					
+					tmpQuery = "SELECT distinct PMCID, TableCaption, TableOrder FROM ( " + 
+							tmpQuery +
+							" ) AS T" + 
+							i +
+							" NATURAL JOIN ( "+
+							" SELECT distinct PMCID, TableCaption, TableOrder FROM clinicTable ";
+					isAND = true;
+			
 					break;
 				case "Or": 
-					// UNION is inferior in precedence to INTERSECT 
-					tmpQuery += " UNION ";					
 					
-					break;			
+					tmpQuery += " UNION ";					
+					isAND = false;
+					
+					break;	
+				default: isAND = false;
 			}
 			
 		}
@@ -250,7 +262,7 @@ public class QueryGenerator {
 	 */
 	public String processCellConstriants(){
 		
-		String loop = "WHERE ";
+		String where = "WHERE ";
 		String tmpQuery = processTableConstriants();
 		
 		tmpQuery = "SELECT distinct PMCID, TableOrder, RowN, ColumnN, WholeHeader, WholeStub, WholeSuperRow, Content  " +
@@ -263,20 +275,29 @@ public class QueryGenerator {
 		
 		if (queryItem.getCellList().size() == 0 ) return tmpQuery;
 		
+		String tmpConstraints ="";
+		
 		for( int i = 0; i < queryItem.getCellList().size();++i){
 			
-			if( i > 0 ) loop = "";
-			tmpQuery += basicCellConstraints(basicCellConstraintsField(queryItem.getCellList().get(i)), 
-					loop,
+			tmpConstraints += basicCellConstraints(basicCellConstraintsField(queryItem.getCellList().get(i)), 
 					queryItem.getCellList().get(i));
 			
+			// AND and OR have the same precedence
+			if (i > 0){
+				tmpConstraints += " ) ";
+				where += " ( ";
+			}
 			
 			switch(queryItem.getCellList().get(i).getLogic()){
-				case "And": tmpQuery += "AND ";break;
-				case "Or": tmpQuery += "OR ";break;
+				case "And": tmpConstraints += "AND ";break;
+				case "Or": tmpConstraints += "OR ";break;
 					
 			}
 		}
+		tmpQuery += where + tmpConstraints;
+		
+		System.out.println("Cell queries: " +tmpQuery);
+		
 		return tmpQuery;
 		
 	}
@@ -288,26 +309,26 @@ public class QueryGenerator {
 	 * @param queryItemCell
 	 * @return
 	 */
-	private String basicCellConstraints(String field, String where, QueryItemCell queryItemCell){
+	private String basicCellConstraints(String field, QueryItemCell queryItemCell){
 		String cellConstraints ="";
 		switch(queryItemCell.getOperations()){
 		
-			case "Contains": cellConstraints = where + field +" like " + "\"%" +
+			case "Contains": cellConstraints = field +" like " + "\"%" +
 				queryItemCell.getConstraintValue() + "%\" "; 
 			break;
 			
 			case "Greater": 
-				cellConstraints = where + field +" > " + 
+				cellConstraints =  field +" > " + 
 				queryItemCell.getConstraintValue()  + " ";
 			break;
 			
 			case "Smaller": 
-				cellConstraints = where + field + " < " + 
+				cellConstraints =  field + " < " + 
 				queryItemCell.getConstraintValue()  + " ";
 			break;
 
 			case "Type": 
-				cellConstraints = where + "CellType = " + "\"" +
+				cellConstraints =  "CellType = " + "\"" +
 				queryItemCell.getConstraintValue() + "\" ";;
 			break;
 				
@@ -356,10 +377,16 @@ public class QueryGenerator {
 
 				break;
 				
-			case "Number": 
+			case "CountTable": 
 
 				query += "SELECT count(*)  FROM ( " +
 						processTableConstriants()+
+						") AS T";
+				
+				break;
+			case "CountCell":
+				query += "SELECT count(*)  FROM ( " +
+						processCellConstriants()+
 						") AS T";
 				
 				break;

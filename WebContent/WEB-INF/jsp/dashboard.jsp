@@ -24,11 +24,11 @@
 
 		$('.radioSelect').click(function(){
 
-			if($(this).val() == "Table" || $(this).val() == "Number" ){
+			if($(this).val() == "Table" || $(this).val() == "CountTable" ){
 				$("#cellConstraints").hide();		
 			}
 			
-			if($(this).val() == "Cell" ){
+			if($(this).val() == "Cell" || $(this).val() == "CountCell" ){
 				$("#cellConstraints").show();
 			}
 		});
@@ -39,7 +39,8 @@
 <script>
 $(document).ready(function() {
 
-	if ($('input[type="radio"]:checked').val() == "Cell"){
+	if ($('input[type="radio"]:checked').val() == "Cell" ||
+			$('input[type="radio"]:checked').val() == "CountCell"){
 		$("#cellConstraints").show();
 	}
 })
@@ -134,7 +135,7 @@ function deleteHistory(query){
 		data: {
  	   		query:query
  	   	},
- 	   	success: function(data) {
+ 	   	success: function() {
  	   	
  			alert("Delete success!");	
  	   },
@@ -201,13 +202,12 @@ function clearHistory(query){
 		
 		<form:form modelAttribute="queryItem" method="post" id="queryItemForm">
 		
-
-
 			<div id ="radioButtonDiv">
 				Select:&nbsp;&nbsp;
 				<form:radiobutton class= "radioSelect" path="select" value="Table" />Table&nbsp;
 				<form:radiobutton class= "radioSelect" path="select" value="Cell" />Cell&nbsp;
-				<form:radiobutton class= "radioSelect" path="select" value="Number" />Count&nbsp;
+				<form:radiobutton class= "radioSelect" path="select" value="CountTable" />Count (<font color = "#F7819F">Table</font>)&nbsp;
+				<form:radiobutton class= "radioSelect" path="select" value="CountCell" />Count (<font color = "#F7819F">Cell</font>)&nbsp;
 			</div>
 
 			<table>
@@ -258,8 +258,6 @@ function clearHistory(query){
    											<form:option value="Super-row">Super-row</form:option>
    											<form:option value="Header">Header</form:option>
    											<form:option value="Footer">Footer</form:option>
-<%--    											<form:option value="Row">Row</form:option>
-   											<form:option value="Column">Column</form:option> --%>
 										</form:select> 
 
 										</div>

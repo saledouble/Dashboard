@@ -4,7 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.dashboard.controller.TextResultMapper;
+import com.dashboard.mapper.TextResultMapper;
 import com.dashboard.model.TextResultModel;
 
 public class TextResultJDBCTemplate implements TextResultDAO{

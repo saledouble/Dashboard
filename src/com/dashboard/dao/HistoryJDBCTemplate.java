@@ -6,7 +6,7 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.dashboard.controller.HistoryMapper;
+import com.dashboard.mapper.HistoryMapper;
 import com.dashboard.model.History;
 
 public class HistoryJDBCTemplate 

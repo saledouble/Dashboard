@@ -4,8 +4,8 @@ import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.dashboard.controller.CellMapper;
-import com.dashboard.controller.TableMapper;
+import com.dashboard.mapper.CellMapper;
+import com.dashboard.mapper.TableMapper;
 import com.dashboard.model.CellModel;
 import com.dashboard.model.TableModel;
 
@@ -28,7 +28,7 @@ public class TableJDBCTemplate implements QueryDAO {
 
 
    @Override
-   public List getItems(String query) {
+   public List<TableModel> getItems(String query) {
 
 	   System.out.println("query: " + query);
   
@@ -37,7 +37,7 @@ public class TableJDBCTemplate implements QueryDAO {
    }
    
    @Override
-   public List getCellItems(String query) {
+   public List<CellModel> getCellItems(String query) {
 
 	   System.out.println("query: " + query);
   

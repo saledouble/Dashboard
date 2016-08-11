@@ -1,4 +1,4 @@
-package com.dashboard.controller;
+package com.dashboard.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
