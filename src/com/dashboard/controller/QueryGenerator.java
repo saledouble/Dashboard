@@ -191,8 +191,9 @@ public class QueryGenerator {
 		String tableConstraints ="";
 		
 		switch(queryItemTable.getOperations()){
-			case "Contains": tableConstraints = "WHERE " + field +" like " + "\"%" +
-				queryItemTable.getConstraintValue() + "%\" "; 
+		
+			case "Contains": tableConstraints = "WHERE " + field +" REGEXP \".*[^0-9.]" +
+				queryItemTable.getConstraintValue() + "[^0-9.].*\" "; 
 			break;
 			case "Greater": 
 				tableConstraints = "WHERE " + field +" > " + 
@@ -313,8 +314,8 @@ public class QueryGenerator {
 		String cellConstraints ="";
 		switch(queryItemCell.getOperations()){
 		
-			case "Contains": cellConstraints = field +" like " + "\"%" +
-				queryItemCell.getConstraintValue() + "%\" "; 
+			case "Contains": cellConstraints = field + " REGEXP \".*[^0-9.]" +
+				queryItemCell.getConstraintValue() + "[^0-9.].*\" "; 
 			break;
 			
 			case "Greater": 
@@ -357,9 +358,8 @@ public class QueryGenerator {
 				cellConstraints = "TableFooter";
 			break;
 			
-		//////这两处以后再做处理
-		case "Row": cellConstraints = "Content"; break;
-		case "Column": cellConstraints = "Content"; break;
+			case "Row": cellConstraints = "RowContent"; break;
+			case "Column": cellConstraints = "ColumnContent"; break;
 		}
 		return cellConstraints;
 	}

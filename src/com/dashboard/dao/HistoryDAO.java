@@ -15,4 +15,10 @@ public interface HistoryDAO {
 	
 	public List<History> getItems();
 
+	void insertRecord(String query);
+
+	void clear();
+
+	void deleteRecord(String query);
+
 }

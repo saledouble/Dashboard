@@ -21,7 +21,6 @@ import com.dashboard.model.QueryItem;
 import com.dashboard.model.QueryItemCell;
 import com.dashboard.model.QueryItemTable;
 import com.dashboard.model.TableModel;
-import com.dashboard.model.TextResultModel;
 
 /**
  * The controller of the dashboard
@@ -46,7 +45,10 @@ public class DropdownMenuController {
 	
 	QueryItem queryItem;
 	
-	
+	String[] colorSet = {"<font color=\"#FF00FF\">", "<font color=\"#FF0000\">",
+			"<font color=\"#FF8000\">","<font color=\"#00FF00\">",
+			"<font color=\"#01DFD7\">","<font color=\"#D7DF01\">"};
+		
 	@RequestMapping(value="/dashboardPage",method=RequestMethod.GET)  
 	public ModelAndView dashboardOptionTag() {
 		
@@ -77,9 +79,10 @@ public class DropdownMenuController {
 		
 		mav.addObject("queryItem", queryItem); 
 		
+		this.queryItem = queryItem;
+		
 		QueryGenerator queryGenerator = new QueryGenerator(queryItem);
 
-		
 		/**
 		 * query and return the result to jsp page
 		 */
@@ -128,6 +131,64 @@ public class DropdownMenuController {
 	}
 	
 	/**
+	 * get the XML of the article which includes the selected table
+	 * @param pmcid
+	 * @return String
+	 */
+	@RequestMapping(value="/dashboardAjax",method=RequestMethod.POST)
+	@ResponseBody
+	public String textResultProcess(@RequestParam(value = "PMCID") String pmcid,
+			@RequestParam(value = "tableOrder") String tableOrder) {
+		
+		String textResult = textResultJDBCTemplate.getItem(pmcid).getTextNode();
+		
+		for (int i = 0; i < this.queryItem.getTableList().size(); ++i){
+					
+			if (this.queryItem.getTableList().get(i).getOperations().equals("Contains")){
+				
+				System.out.println("table order  : "+tableOrder);
+				textResult = processStringColor(textResult,
+										this.queryItem.getTableList().get(i).getField(),
+										tableOrder);
+//				textResult = textResult.replaceAll(this.queryItem.getTableList().get(i).getConstraintValue(), 
+//								
+//								"<font color=\"#FF00FF\">"+
+//								this.queryItem.getTableList().get(i).getConstraintValue()+
+//								"</font>");
+			}
+		}
+		
+		return textResult;
+
+	 }
+	
+	private String processStringColor(String text, String field, String tableOrder){
+
+		switch(field){
+			case "Caption":
+
+				break;
+				
+			case "Stub": 
+
+				break;
+			case "Super-row": 
+
+				break;
+			case "Header": 
+
+				break;
+			case "Footer": 
+
+				break;
+			default:
+				
+			break;
+		}
+	}
+	
+	
+	/**
 	 * get all histories from database
 	 * and make the query can be passed through ajax
 	 * @param historyProcessor
@@ -144,24 +205,6 @@ public class DropdownMenuController {
 		
 		return histories;
 	}
-	
-	
-	
-	/**
-	 * get the XML of the article which includes the selected table
-	 * @param pmcid
-	 * @return String
-	 */
-	@RequestMapping(value="/dashboardAjax",method=RequestMethod.POST)
-	@ResponseBody
-	public String textResultProcess(@RequestParam(value = "PMCID") String pmcid) {
-		
-		
-		TextResultModel textResult = textResultJDBCTemplate.getItem(pmcid);
-
-		return textResult.getTextNode();
-
-	 }
 	
 	
 	/**
@@ -197,10 +240,7 @@ public class DropdownMenuController {
 	public ModelAndView histroryQuery(@RequestParam(value = "select") String select,
 								@RequestParam(value = "query") String query) {
 		
-
 		ModelAndView mav = new ModelAndView("history"); 
-	
-		System.out.println("test select: " +select);
 		
 		switch(select){
 		case "Table":  

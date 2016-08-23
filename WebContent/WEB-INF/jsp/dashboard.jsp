@@ -82,12 +82,13 @@ function myFuncton(tableOrder,PMCID){
  	$.ajax({
 		url: 'dashboardAjax',
 		data: {
- 	   		PMCID: PMCID
+ 	   		PMCID: PMCID,
+ 	   		tableOrder:tableOrder
  	   	},
  	   	success: function(data) {
  	   		
  			$('#tab-2').html($(data).find("label:contains("+tableOrder+")").parent());
- 		 
+ 			
  	   },
  	   type: 'POST'
  	});

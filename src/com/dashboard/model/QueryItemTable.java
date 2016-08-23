@@ -67,5 +67,5 @@ public class QueryItemTable {
 	public void setLogic(String logic){
 		this.logic = logic;
 	}
-	
+
 }

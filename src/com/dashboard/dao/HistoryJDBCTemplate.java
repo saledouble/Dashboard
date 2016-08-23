@@ -34,6 +34,7 @@ public class HistoryJDBCTemplate
 	    * when every submit happens, a new record will be inserted into database
 	    * @param query
 	    */
+	   @Override
 	   public void insertRecord(String query){
 		   jdbcTemplateObject.execute(query);
 	   }
@@ -41,6 +42,7 @@ public class HistoryJDBCTemplate
 	   /**
 	    * clear all records in the tables
 	    */
+	   @Override
 	   public void clear(){
 		   jdbcTemplateObject.execute("Truncate History;");
 	   }
@@ -49,6 +51,7 @@ public class HistoryJDBCTemplate
 	    * delete one selected history
 	    * @param query
 	    */
+	   @Override
 	   public void deleteRecord(String query){
 		   
 		   String deleteQuery = "DELETE FROM History WHERE queryString = \'"+query+"\'";
