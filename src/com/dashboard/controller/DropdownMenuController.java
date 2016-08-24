@@ -172,8 +172,6 @@ public class DropdownMenuController {
 		
 		int index;
 		
-		System.out.println(tableNode);
-		
 		switch(field){
 			case "Caption":
 				Element caption = tableNode.select("p").first();
