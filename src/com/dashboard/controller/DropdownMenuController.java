@@ -52,7 +52,8 @@ public class DropdownMenuController {
 	QueryItem queryItem;
 	
 	String[] colorSet = {"<font color=\"#FF00FF\">", "<font color=\"#FF0000\">",
-			"<font color=\"#FF8000\">","<font color=\"#00FF00\">","<font color=\"#D7DF01\">"};
+			"<font color=\"#FF8000\">","<font color=\"#00FF00\">",
+			"<font color=\"#D7DF01\">","<font color=\"#088A4B\">"};
 		
 	@RequestMapping(value="/dashboardPage",method=RequestMethod.GET)  
 	public ModelAndView dashboardOptionTag() {
@@ -155,12 +156,6 @@ public class DropdownMenuController {
 										this.queryItem.getTableList().get(i).getField(),
 										tableOrder,
 										this.queryItem.getTableList().get(i).getConstraintValue());
-				
-//				textResult = textResult.replaceAll(this.queryItem.getTableList().get(i).getConstraintValue(), 
-//								
-//								"<font color=\"#FF00FF\">"+
-//								this.queryItem.getTableList().get(i).getConstraintValue()+
-//								"</font>");
 			}
 		}
 		
@@ -177,11 +172,12 @@ public class DropdownMenuController {
 		
 		int index;
 		
+		System.out.println(tableNode);
+		
 		switch(field){
 			case "Caption":
 				Element caption = tableNode.select("p").first();
-				
-				System.out.println(caption.text());
+				System.out.println(caption);
 				
 				Document doc1 = Jsoup.parse("<p>"+
 						caption.text().replaceAll(pattern,"$1" + colorSet[0]+ value + "</font>$2") +
@@ -241,7 +237,6 @@ public class DropdownMenuController {
 					index++;
 				}
 				break;
-				
 			default:
 				
 				tbodys = tableNode.select("tbody tr td[align=center]");
