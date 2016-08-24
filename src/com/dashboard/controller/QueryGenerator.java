@@ -191,9 +191,9 @@ public class QueryGenerator {
 		String tableConstraints ="";
 		
 		switch(queryItemTable.getOperations()){
-		
-			case "Contains": tableConstraints = "WHERE " + field +" REGEXP \".*[^0-9.]" +
-				queryItemTable.getConstraintValue() + "[^0-9.].*\" "; 
+
+			case "Contains": tableConstraints = "WHERE " + field +" REGEXP \"(.*[^0-9]|^)"  +
+				queryItemTable.getConstraintValue() + "([^0-9].*|$)\" "; 
 			break;
 			case "Greater": 
 				tableConstraints = "WHERE " + field +" > " + 
@@ -313,9 +313,9 @@ public class QueryGenerator {
 	private String basicCellConstraints(String field, QueryItemCell queryItemCell){
 		String cellConstraints ="";
 		switch(queryItemCell.getOperations()){
-		
-			case "Contains": cellConstraints = field + " REGEXP \".*[^0-9.]" +
-				queryItemCell.getConstraintValue() + "[^0-9.].*\" "; 
+
+			case "Contains": cellConstraints = field + " REGEXP \"(.*[^0-9]|^)" +
+				queryItemCell.getConstraintValue() + "([^0-9].*|$)\" "; 
 			break;
 			
 			case "Greater": 

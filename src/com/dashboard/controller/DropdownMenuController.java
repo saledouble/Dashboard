@@ -2,7 +2,13 @@ package com.dashboard.controller;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -46,8 +52,7 @@ public class DropdownMenuController {
 	QueryItem queryItem;
 	
 	String[] colorSet = {"<font color=\"#FF00FF\">", "<font color=\"#FF0000\">",
-			"<font color=\"#FF8000\">","<font color=\"#00FF00\">",
-			"<font color=\"#01DFD7\">","<font color=\"#D7DF01\">"};
+			"<font color=\"#FF8000\">","<font color=\"#00FF00\">","<font color=\"#D7DF01\">"};
 		
 	@RequestMapping(value="/dashboardPage",method=RequestMethod.GET)  
 	public ModelAndView dashboardOptionTag() {
@@ -146,10 +151,11 @@ public class DropdownMenuController {
 					
 			if (this.queryItem.getTableList().get(i).getOperations().equals("Contains")){
 				
-				System.out.println("table order  : "+tableOrder);
 				textResult = processStringColor(textResult,
 										this.queryItem.getTableList().get(i).getField(),
-										tableOrder);
+										tableOrder,
+										this.queryItem.getTableList().get(i).getConstraintValue());
+				
 //				textResult = textResult.replaceAll(this.queryItem.getTableList().get(i).getConstraintValue(), 
 //								
 //								"<font color=\"#FF00FF\">"+
@@ -162,29 +168,100 @@ public class DropdownMenuController {
 
 	 }
 	
-	private String processStringColor(String text, String field, String tableOrder){
+	private String processStringColor(String text, String field, String tableOrder, String value){
 
+		Document doc = Jsoup.parse(text);
+		Element tableNode = doc.getElementsByTag("table-wrap").select("label:contains("+tableOrder+")").get(0).parent();
+		
+		String pattern = "(^|[^0-9.])"+value+"([^0-9.]|$)";
+		
+		int index;
+		
 		switch(field){
 			case "Caption":
-
-				break;
+				Element caption = tableNode.select("p").first();
 				
-			case "Stub": 
-
+				System.out.println(caption.text());
+				
+				Document doc1 = Jsoup.parse("<p>"+
+						caption.text().replaceAll(pattern,"$1" + colorSet[0]+ value + "</font>$2") +
+						"</p>"
+						);
+				
+				tableNode.select("p").get(0).replaceWith(doc1.getElementsByTag("p").get(0));
+		
 				break;
-			case "Super-row": 
 
-				break;
 			case "Header": 
+				
+				Element header = tableNode.select("thead").first();
+				Elements tds = header.select("tr td");
+				
+				index = 0;
+				
+				for (Element td : tds) {
+					
+					System.out.println(td.text());
+					
+					doc1 = Jsoup.parse("<table><tr><td align=\"center\">"+
+							td.text().replaceAll(pattern,"$1" + colorSet[1]+ value + "</font>$2") +
+							"</td></tr></table>"
+							);
+					
+					tableNode.select("thead").first().select("tr td").get(index).replaceWith(doc1.getElementsByTag("td").first());
+
+					index++; 
+				}
 
 				break;
 			case "Footer": 
 
+				Elements footers = tableNode.select("table-wrap-foot p");
+				index = 0;
+				for (Element footer : footers) {
+					doc1 = Jsoup.parse("<p>"+
+						footer.text().replaceAll(pattern,"$1" + colorSet[2]+ value + "</font>$2") +
+						"</p>"
+						);
+				
+					tableNode.select("table-wrap-foot p").get(index).replaceWith(doc1.getElementsByTag("p").first());
+				}
 				break;
+			case "Stub":
+			case "Super-row":
+				Elements tbodys = tableNode.select("tbody tr td[align=left]");
+				index = 0;
+				for (Element tbody : tbodys) {
+					doc1 = Jsoup.parse("<table><tr><td align=\"left\">"+
+							tbody.text().replaceAll(pattern,"$1" + colorSet[1]+ value + "</font>$2") +
+							"</td></tr></table>"
+							);
+				
+					tableNode.select("tbody tr td[align=left]").get(index).replaceWith(doc1.getElementsByTag("td").first());
+					index++;
+				}
+				break;
+				
 			default:
+				
+				tbodys = tableNode.select("tbody tr td[align=center]");
+				
+				index = 0;
+				for (Element tbody : tbodys) {
+					doc1 = Jsoup.parse("<table><tr><td align=\"center\">"+
+							tbody.text().replaceAll(pattern,"$1" + colorSet[4]+ value + "</font>$2") +
+							"</td></tr></table>"
+							);
+					
+					tableNode.select("tbody tr td[align=center]").get(index).replaceWith(doc1.getElementsByTag("td").first());
+					index++;
+				}
 				
 			break;
 		}
+		
+		//System.out.println("tableNode: "+ tableNode.html());
+		return tableNode.parent().html();
 	}
 	
 	
